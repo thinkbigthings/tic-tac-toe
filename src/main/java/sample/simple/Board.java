@@ -102,11 +102,11 @@ public class Board {
     }
 
     public Board withPlay(Slot position, Play player) {
-        Board newboard = new Board(boardSize);
-        newboard.setPositions(this);
-        if(!newboard.positions[position.row][position.col].equals(Play.UNPLAYED)) {
+        if(!positions[position.row][position.col].equals(Play.UNPLAYED)) {
             throw new IllegalArgumentException("Can't move here!");
         }
+        Board newboard = new Board(boardSize);
+        newboard.setPositions(this);
         newboard.positions[position.row][position.col] = player;
         return newboard;
     }

@@ -68,6 +68,9 @@ public class SampleSimpleApplication implements CommandLineRunner {
 
 			currentPlayer = (currentPlayer == p1) ? p2 : p1;
 		}
+
+		System.out.println();
+
 	}
 
 	public static void main(String[] args) throws Exception {

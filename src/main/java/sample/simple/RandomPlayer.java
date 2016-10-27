@@ -1,9 +1,13 @@
 package sample.simple;
 
 
+import java.util.Random;
+
 public class RandomPlayer implements Player {
+
     private Board.Play playSymbol;
     private int boardSize;
+    private final Random random = new Random();
 
     @Override
     public Board.Play getPlaySymbol() {
@@ -17,15 +21,16 @@ public class RandomPlayer implements Player {
 
     @Override
     public Board getNextMove(Board currentBoard) {
-        for (int r = 0; r < boardSize; r++) {
-            for (int c = 0; c < boardSize; c++) {
-                try {
-                    return currentBoard.withPlay(new Board.Slot(r, c), playSymbol);
-                } catch (IllegalArgumentException ex) {
-                    // keep trying
-                }
+
+        // TODO should not use a while(true) loop
+        while( true ) {
+            try {
+                int r = random.nextInt(3);
+                int c = random.nextInt(3);
+                return currentBoard.withPlay(new Board.Slot(r, c), playSymbol);
+            } catch (IllegalArgumentException ex) {
+                // keep trying
             }
         }
-        return currentBoard;
     }
 }
