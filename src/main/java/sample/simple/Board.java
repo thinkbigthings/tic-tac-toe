@@ -93,7 +93,6 @@ public class Board {
                 if (positions[d][(boardSize - 1) - d].equals(play)) {
                     playCountAntiDiag++;
                 }
-
             }
             if(playCountDiag == boardSize || playCountAntiDiag == boardSize)
                 return true;

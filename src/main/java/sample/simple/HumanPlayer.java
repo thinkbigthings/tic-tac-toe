@@ -23,16 +23,45 @@ public class HumanPlayer implements Player {
     public Board getNextMove(Board currentBoard) {
 
         Board newBoard = null;
+        String entry = null;
         while(newBoard == null) {
+
             try {
-                String entry = scanner.next();
-                String[] moveIndex = entry.split(" ");
-                int row = Integer.parseInt(moveIndex[0]);
-                int col = Integer.parseInt(moveIndex[1]);
+
+                entry = scanner.next().trim();
+
+                int row = 0;
+                int col = 0;
+                String r = entry.substring(0,1);
+                String c = entry.substring(1,2);
+                if(r.equals("t")) {
+                    row = 0;
+                }
+                else if(r.equals("m")) {
+                    row = 1;
+                }
+                else if(r.equals("b")) {
+                    row = 2;
+                }
+                else {
+                    throw new IllegalArgumentException();
+                }
+                if(c.equals("l")) {
+                    col = 0;
+                }
+                else if(c.equals("m")) {
+                    col = 1;
+                }
+                else if(c.equals("r")) {
+                    col = 2;
+                }
+                else {
+                    throw new IllegalArgumentException();
+                }
                 newBoard = currentBoard.withPlay(new Board.Slot(row, col), playSymbol);
             }
             catch (Exception ex) {
-                System.out.println(ex);
+                System.out.println("I didn't understand " + entry);
                 // keep trying
             }
         }
