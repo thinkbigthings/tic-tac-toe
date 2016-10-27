@@ -82,6 +82,23 @@ public class Board {
                 return true;
         }
 
+        // check diagonals if odd board size
+        if(this.boardSize % 2 == 1) {
+            int playCountDiag = 0;
+            int playCountAntiDiag = 0;
+            for (int d = 0; d < boardSize; d++) {
+                if (positions[d][d].equals(play)) {
+                    playCountDiag++;
+                }
+                if (positions[d][(boardSize - 1) - d].equals(play)) {
+                    playCountAntiDiag++;
+                }
+
+            }
+            if(playCountDiag == boardSize || playCountAntiDiag == boardSize)
+                return true;
+        }
+
         return false;
     }
 
