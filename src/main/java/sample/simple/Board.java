@@ -44,6 +44,10 @@ public class Board {
         }
     }
 
+    public int size() {
+        return boardSize;
+    }
+
     public boolean isFull() {
         // TODO increment count of number of plays while playing so this is O(1)
         int numberPlays = 0;

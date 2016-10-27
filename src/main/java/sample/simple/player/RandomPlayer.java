@@ -2,14 +2,12 @@ package sample.simple.player;
 
 
 import sample.simple.Board;
-import sample.simple.player.Player;
 
 import java.util.Random;
 
 public class RandomPlayer implements Player {
 
     private Board.Play playSymbol;
-    private int boardSize;
     private final Random random = new Random();
 
     @Override
@@ -17,9 +15,8 @@ public class RandomPlayer implements Player {
         return playSymbol;
     }
 
-    public RandomPlayer(Board.Play symbol, int boardDimension) {
+    public RandomPlayer(Board.Play symbol) {
         playSymbol = symbol;
-        boardSize = boardDimension;
     }
 
     @Override
@@ -28,8 +25,8 @@ public class RandomPlayer implements Player {
         // TODO should not use a while(true) loop
         while( true ) {
             try {
-                int r = random.nextInt(boardSize);
-                int c = random.nextInt(boardSize);
+                int r = random.nextInt(currentBoard.size());
+                int c = random.nextInt(currentBoard.size());
                 return currentBoard.withPlay(new Board.Slot(r, c), playSymbol);
             } catch (IllegalArgumentException ex) {
                 // keep trying
