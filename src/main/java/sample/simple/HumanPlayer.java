@@ -61,7 +61,7 @@ public class HumanPlayer implements Player {
                 newBoard = currentBoard.withPlay(new Board.Slot(row, col), playSymbol);
             }
             catch (Exception ex) {
-                System.out.println("I didn't understand " + entry);
+                System.out.println("I didn't understand " + entry + ", commands are tl, tm, tr, ml, mm, mr, bl, bm, br");
                 // keep trying
             }
         }
