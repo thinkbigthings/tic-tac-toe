@@ -39,6 +39,24 @@ public class Application implements CommandLineRunner {
 
 		System.out.println(this.helloWorldService.getHelloMessage());
 
+		// TODO refactor this into a game and allow user to play another game after a game ends
+
+		// TODO write unit tests
+
+		// TODO put board dimensions in properties file and command line
+
+		// TODO specify player letters X and O in properties or readme
+
+		// TODO specify human or AI as player 1 or player 2 in properties or command line
+
+		// TODO update usage in README
+
+		// TODO keep track of score between multiple games
+
+		// TODO write logs to a file instead of standard out so UI is better.
+
+		// TODO write a winning algorithm for the AI
+
 		Player p1 = new HumanPlayer(Board.Play.X, System.in);
 		Player p2 = new RandomPlayer(Board.Play.O, 3);
 		Player currentPlayer = p1;
