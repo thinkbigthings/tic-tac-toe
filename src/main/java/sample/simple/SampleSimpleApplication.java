@@ -35,10 +35,8 @@ public class SampleSimpleApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
+
 		System.out.println(this.helloWorldService.getHelloMessage());
-		if (args.length > 0 && args[0].equals("exitcode")) {
-			throw new ExitException();
-		}
 
 		Player p1 = new HumanPlayer(Board.Play.X, System.in);
 		Player p2 = new RandomPlayer(Board.Play.O, 3);
