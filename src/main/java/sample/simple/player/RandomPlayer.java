@@ -1,5 +1,8 @@
-package sample.simple;
+package sample.simple.player;
 
+
+import sample.simple.Board;
+import sample.simple.player.Player;
 
 import java.util.Random;
 
@@ -25,8 +28,8 @@ public class RandomPlayer implements Player {
         // TODO should not use a while(true) loop
         while( true ) {
             try {
-                int r = random.nextInt(3);
-                int c = random.nextInt(3);
+                int r = random.nextInt(boardSize);
+                int c = random.nextInt(boardSize);
                 return currentBoard.withPlay(new Board.Slot(r, c), playSymbol);
             } catch (IllegalArgumentException ex) {
                 // keep trying

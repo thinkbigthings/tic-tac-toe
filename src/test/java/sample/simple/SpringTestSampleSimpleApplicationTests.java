@@ -27,7 +27,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Tests for {@link SampleSimpleApplication}.
+ * Tests for {@link Application}.
  *
  * @author Dave Syer
  */

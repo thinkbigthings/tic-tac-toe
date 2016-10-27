@@ -16,6 +16,9 @@
 
 package sample.simple;
 
+import sample.simple.player.HumanPlayer;
+import sample.simple.player.Player;
+import sample.simple.player.RandomPlayer;
 import sample.simple.service.HelloWorldService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +27,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SampleSimpleApplication implements CommandLineRunner {
+public class Application implements CommandLineRunner {
 
-	// Simple example shows how a command line spring application can execute an
-	// injected bean service. Also demonstrates how you can use @Value to inject
-	// command line args ('--name=whatever') or application properties
+	// you can use @Value to inject command line args ('--name=whatever') or application properties
 
 	@Autowired
 	private HelloWorldService helloWorldService;
@@ -72,7 +73,7 @@ public class SampleSimpleApplication implements CommandLineRunner {
 	}
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(SampleSimpleApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 

@@ -1,4 +1,7 @@
-package sample.simple;
+package sample.simple.player;
+
+import sample.simple.Board;
+import sample.simple.player.Player;
 
 import java.io.InputStream;
 import java.util.Scanner;

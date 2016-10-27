@@ -26,7 +26,7 @@ import org.springframework.boot.test.rule.OutputCapture;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Tests for {@link SampleSimpleApplication}.
+ * Tests for {@link Application}.
  *
  * @author Dave Syer
  * @author Phillip Webb
@@ -55,14 +55,14 @@ public class SampleSimpleApplicationTests {
 
 	@Test
 	public void testDefaultSettings() throws Exception {
-		SampleSimpleApplication.main(new String[0]);
+		Application.main(new String[0]);
 		String output = this.outputCapture.toString();
 		assertThat(output).contains("Hello Phil");
 	}
 
 	@Test
 	public void testCommandLineOverrides() throws Exception {
-		SampleSimpleApplication.main(new String[] { "--name=Gordon" });
+		Application.main(new String[] { "--name=Gordon" });
 		String output = this.outputCapture.toString();
 		assertThat(output).contains("Hello Gordon");
 	}
