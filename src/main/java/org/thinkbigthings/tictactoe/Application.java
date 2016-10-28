@@ -1,6 +1,6 @@
-package sample.simple;
+package org.thinkbigthings.tictactoe;
 
-import sample.simple.service.HelloWorldService;
+import org.thinkbigthings.tictactoe.service.HelloWorldService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

@@ -1,9 +1,9 @@
-package sample.simple;
+package org.thinkbigthings.tictactoe;
 
 
-import sample.simple.player.HumanPlayer;
-import sample.simple.player.Player;
-import sample.simple.player.RandomPlayer;
+import org.thinkbigthings.tictactoe.player.HumanPlayer;
+import org.thinkbigthings.tictactoe.player.Player;
+import org.thinkbigthings.tictactoe.player.RandomPlayer;
 
 public class Game {
 
@@ -51,6 +51,10 @@ public class Game {
         // TODO keep track of score between multiple games
 
         // TODO write a winning algorithm for the AI
+
+        // TODO write a clickable interface with a web page
+
+        // TODO use websockets
 
         System.out.println(currentBoard);
 

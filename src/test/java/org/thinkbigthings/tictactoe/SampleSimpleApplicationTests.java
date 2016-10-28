@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sample.simple;
+package org.thinkbigthings.tictactoe;
 
 import org.junit.After;
 import org.junit.Before;
@@ -22,6 +22,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import org.springframework.boot.test.rule.OutputCapture;
+import org.thinkbigthings.tictactoe.Application;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

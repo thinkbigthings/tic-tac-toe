@@ -1,4 +1,4 @@
-package sample.simple;
+package org.thinkbigthings.tictactoe;
 
 
 /**

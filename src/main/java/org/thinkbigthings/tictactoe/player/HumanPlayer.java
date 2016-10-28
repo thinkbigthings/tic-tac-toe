@@ -1,7 +1,6 @@
-package sample.simple.player;
+package org.thinkbigthings.tictactoe.player;
 
-import sample.simple.Board;
-import sample.simple.player.Player;
+import org.thinkbigthings.tictactoe.Board;
 
 import java.io.InputStream;
 import java.util.Scanner;

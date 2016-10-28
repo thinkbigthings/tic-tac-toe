@@ -1,7 +1,7 @@
-package sample.simple.player;
+package org.thinkbigthings.tictactoe.player;
 
 
-import sample.simple.Board;
+import org.thinkbigthings.tictactoe.Board;
 
 import java.util.Random;
 
