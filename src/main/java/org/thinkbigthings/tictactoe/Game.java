@@ -34,8 +34,6 @@ public class Game {
 
         // TODO write unit tests
 
-        // TODO ensure gradlew works and is at latest version
-
         // TODO put board dimensions in properties file and command line
 
         // TODO specify player letters X and O in properties or readme
