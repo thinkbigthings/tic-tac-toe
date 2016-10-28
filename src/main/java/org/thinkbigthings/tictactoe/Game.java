@@ -35,12 +35,12 @@ public class Game {
         // TODO write unit tests
 
         // TODO put board dimensions in properties file and command line
-
         // TODO specify player letters X and O in properties or readme
-
         // TODO specify human or AI as player 1 or player 2 in properties or command line
 
         // TODO update usage in README
+
+        // TODO try out using different letters instead of X/O. Does code still make sense then?
 
         // TODO write logs to a file instead of standard out so UI is better.
 
