@@ -32,13 +32,14 @@ public class Game {
         Player currentPlayer = p1;
         Board currentBoard = new Board(boardSize);
 
-        // TODO write unit tests and set up code coverage
-
         // TODO put board dimensions in properties file and command line
         // TODO specify player letters X and O in properties or readme
         // TODO specify human or AI as player 1 or player 2 in properties or command line
 
         // TODO update usage in README
+
+        // TODO break build on decreasing code coverage
+        // http://stackoverflow.com/questions/35540823/minimum-code-coverage-threshold-in-jacoco-gradle
 
         // TODO be able to monitor with JMX
 
