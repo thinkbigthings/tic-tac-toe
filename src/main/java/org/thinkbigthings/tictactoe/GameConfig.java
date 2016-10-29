@@ -14,19 +14,46 @@
  * limitations under the License.
  */
 
-package org.thinkbigthings.tictactoe.service;
+package org.thinkbigthings.tictactoe;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HelloWorldService {
+public class GameConfig {
 
-	@Value("${name:Player}")
-	private String name;
+	@Value("${boardSize:3}")
+	private int boardSize;
 
-	public String getHelloMessage() {
-		return "Hello " + this.name;
+	@Value("${player1.symbol:X}")
+	private String player1Token;
+
+	@Value("${player1.identity:human}")
+	private String player1Identity;
+
+	@Value("${player2.symbol:X}")
+	private String player2Token;
+
+	@Value("${player2.identity:human}")
+	private String player2Identity;
+
+	public int getBoardSize() {
+		return boardSize;
 	}
 
+	public String getPlayer1Token() {
+		return player1Token;
+	}
+
+	public String getPlayer1Identity() {
+		return player1Identity;
+	}
+
+	public String getPlayer2Token() {
+		return player2Token;
+	}
+
+	public String getPlayer2Identity() {
+		return player2Identity;
+	}
 }

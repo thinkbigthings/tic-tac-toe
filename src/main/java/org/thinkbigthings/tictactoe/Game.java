@@ -11,10 +11,10 @@ public class Game {
     private Player p2;
     int boardSize;
 
-    public Game(int boardSize, String playerIdentity1,Board.Play player1, String playerIdentity2, Board.Play player2) {
-        p1 = createPlayer(player1, playerIdentity1);
-        p2 = createPlayer(player2, playerIdentity2);
-        this.boardSize = boardSize;
+    public Game(GameConfig config) {
+        p1 = createPlayer(Board.Play.valueOf(config.getPlayer1Token()), config.getPlayer1Identity());
+        p2 = createPlayer(Board.Play.valueOf(config.getPlayer2Token()), config.getPlayer2Identity());
+        boardSize = config.getBoardSize();
     }
 
     protected Player createPlayer(Board.Play symbol, String identity) {
@@ -32,10 +32,8 @@ public class Game {
         Player currentPlayer = p1;
         Board currentBoard = new Board(boardSize);
 
-        // TODO put board dimensions in properties file and command line
-        // TODO specify player letters X and O in properties or readme
-        // TODO specify human or AI as player 1 or player 2 in properties or command line
-
+        // TODO set artifact versions
+        
         // TODO update usage in README
 
         // TODO break build on decreasing code coverage
