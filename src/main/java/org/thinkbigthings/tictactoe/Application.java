@@ -24,6 +24,7 @@ public class Application implements CommandLineRunner {
 		if(args.length > 0 && args[0].contains("help")) {
 			System.out.println("The properties can be set in application.properties, or overridden from the command line");
 			System.out.println("sample arguments are: --boardSize=3 --player1.identity=computer --player2.identity=computer --player1.symbol=X --player2.symbol=O");
+			return;
 		}
 
 		Scanner scanner = new Scanner(System.in);

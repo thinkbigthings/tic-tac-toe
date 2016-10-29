@@ -32,9 +32,6 @@ public class Game {
         Player currentPlayer = p1;
         Board currentBoard = new Board(boardSize);
 
-        // for 0.2.0
-        // TODO implement -help to print usage
-
         // for 0.3.0
         // TODO reduce complexity, start with Board.isWinner()
         // TODO be able to run with gradlew bootRun
