@@ -32,7 +32,7 @@ public class Game {
         Player currentPlayer = p1;
         Board currentBoard = new Board(boardSize);
 
-        // TODO write unit tests
+        // TODO write unit tests and set up code coverage
 
         // TODO put board dimensions in properties file and command line
         // TODO specify player letters X and O in properties or readme
@@ -40,9 +40,13 @@ public class Game {
 
         // TODO update usage in README
 
-        // TODO try out using different letters instead of X/O. Does code still make sense then?
+        // TODO be able to monitor with JMX
 
-        // TODO write logs to a file instead of standard out so UI is better.
+        // TODO implement -help to print usage
+
+        // TODO get player symbol from configuration instead of hard coding to board
+
+        // TODO write logs to a file instead of standard out so CLI UI is better.
 
         // TODO use a tic tac toe image on startup
 

@@ -29,9 +29,9 @@ public class Application implements CommandLineRunner {
 		while(keepPlaying) {
 			Game game = new Game(3, "human", Board.Play.X, "computer", Board.Play.O);
 			game.play();
-			System.out.print("Play again? (y/n): ");
+			System.out.print("Play again? (yes/no): ");
 			String playerContinue = scanner.next().trim();
-			if( ! playerContinue.startsWith("y")) {
+			if( ! playerContinue.equals("yes")) {
 				keepPlaying = false;
 			}
 		}

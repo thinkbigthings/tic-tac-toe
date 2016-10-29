@@ -58,7 +58,7 @@ public class Board {
                 }
             }
         }
-        return numberPlays == 3*3;
+        return numberPlays == (boardSize * boardSize);
     }
 
     // TODO can check a winning play in O(1) if you track player counts by row/col as you make them
