@@ -115,11 +115,6 @@ public class Board {
         return newBoard;
     }
 
-    public Board(Board previous, Slot position, Play player) {
-        setPositions(previous);
-        positions[position.row][position.col] = player;
-    }
-
     // TODO is there a way to have a single method to iterate over cells that takes a lambda for assignments or tests?
     private void setPositions(Board oldBoard) {
         for (int r = 0; r < boardSize; r++) {
