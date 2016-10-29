@@ -32,26 +32,30 @@ public class Game {
         Player currentPlayer = p1;
         Board currentBoard = new Board(boardSize);
 
-        // TODO set artifact versions
-        
-        // TODO update usage in README
-
-        // TODO break build on decreasing code coverage
-        // http://stackoverflow.com/questions/35540823/minimum-code-coverage-threshold-in-jacoco-gradle
-
-        // TODO be able to monitor with JMX
-
+        // for 0.2.0
+        // TODO update usage in README with properties and command line overrides
         // TODO implement -help to print usage
 
-        // TODO get player symbol from configuration instead of hard coding to board
+        // for 0.3.0
+        // TODO reduce complexity, start with Board.isWinner()
+        // TODO break build on decreasing code coverage
+        // http://stackoverflow.com/questions/35540823/minimum-code-coverage-threshold-in-jacoco-gradle
+        // TODO be able to monitor with JMX
 
+        // for 0.4.0
         // TODO write logs to a file instead of standard out so CLI UI is better.
-
         // TODO use a tic tac toe image on startup
+
+        // for 0.5.0
+        // TODO handle TODO's elsewhere in the code or move to this list
+
+        // for 1.0
+        // TODO get player symbol from configuration instead of hard coding to board
+        // TODO experiment with board sizes besides 3
 
         // TODO keep track of score between multiple games
 
-        // TODO write a winning algorithm for the AI
+        // TODO write a winning algorithm for the AI, optionally display chances of each player to win
 
         // TODO write a clickable interface with a web page
 
