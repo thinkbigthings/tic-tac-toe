@@ -32,13 +32,14 @@ public class Board {
         }
     }
 
-    private int boardSize = 3;
-    private Play[][] positions = new Play[3][3];
+    private int boardSize;
+    private Play[][] positions;
 
     public Board(int size) {
         boardSize = size;
-        for (int r = 0; r < boardSize; r++) {
-            for (int c = 0; c < boardSize; c++) {
+        positions = new Play[size][size];
+        for (int r = 0; r < size; r++) {
+            for (int c = 0; c < size; c++) {
                 positions[r][c] = Play.UNPLAYED;
             }
         }

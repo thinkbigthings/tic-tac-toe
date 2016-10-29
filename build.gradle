@@ -40,6 +40,7 @@ repositories {
 }
 
 dependencies {
+	compile("javax.inject:javax.inject:1")
 	compile("org.springframework.boot:spring-boot-starter")
 	testCompile("org.springframework.boot:spring-boot-starter-test")
 }
@@ -50,7 +51,6 @@ task wrapper(type: Wrapper) {
 
 jacoco {
 	toolVersion = "0.7.6.201602180812"
-	//reportsDir = file("$buildDir/customJacocoReportDir")
 }
 
 jacocoTestReport {

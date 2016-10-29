@@ -33,11 +33,11 @@ public class Game {
         Board currentBoard = new Board(boardSize);
 
         // for 0.2.0
-        // TODO update usage in README with properties and command line overrides
         // TODO implement -help to print usage
 
         // for 0.3.0
         // TODO reduce complexity, start with Board.isWinner()
+        // TODO be able to run with gradlew bootRun
         // TODO break build on decreasing code coverage
         // http://stackoverflow.com/questions/35540823/minimum-code-coverage-threshold-in-jacoco-gradle
         // TODO be able to monitor with JMX
@@ -51,7 +51,7 @@ public class Game {
 
         // for 1.0
         // TODO get player symbol from configuration instead of hard coding to board
-        // TODO experiment with board sizes besides 3
+        // TODO experiment with board sizes besides 3, command line entry doesn't work with letters, for example
 
         // TODO keep track of score between multiple games
 
