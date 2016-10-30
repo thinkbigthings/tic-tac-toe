@@ -15,6 +15,11 @@ public class HumanPlayer implements Player {
         return playSymbol;
     }
 
+    @Override
+    public String getPlaySymbolString() {
+        return playSymbol.toString();
+    }
+
     public HumanPlayer(Board.Play symbol, InputStream in) {
         scanner = new Scanner(in);
         scanner.useDelimiter(System.lineSeparator());

@@ -6,4 +6,5 @@ public interface Player {
 
     Board getNextMove(Board currentBoard);
     Board.Play getPlaySymbol();
+    String getPlaySymbolString();
 }

@@ -20,6 +20,11 @@ public class RandomPlayer implements Player {
     }
 
     @Override
+    public String getPlaySymbolString() {
+        return playSymbol.toString();
+    }
+
+    @Override
     public Board getNextMove(Board currentBoard) {
 
         // TODO should not use a while(true) loop
