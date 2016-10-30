@@ -24,4 +24,15 @@ public class BoardTest {
         Board board = new Board(1);
         assertNotNull(board.toString());
     }
+
+    @Test
+    public void testIsWinnerEvenDiagonal() throws Exception {
+
+        Board board = new Board(4)
+                .withPlay(new Board.Slot(0,0), Board.Play.X)
+                .withPlay(new Board.Slot(1,1), Board.Play.X)
+                .withPlay(new Board.Slot(2,2), Board.Play.X)
+                .withPlay(new Board.Slot(3,3), Board.Play.X);
+        assertTrue(board.isWinner(Board.Play.X));
+    }
 }

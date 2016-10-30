@@ -35,6 +35,17 @@ public class Board {
     private int boardSize;
     private Play[][] positions;
 
+    // play count tracking
+    // TODO maybe move to own class?
+    private int[] sumPlaysPerRowP1;
+    private int[] sumPlaysPerRowP2;
+    private int[] sumPlaysPerColP1;
+    private int[] sumPlaysPerColP2;
+    private int sumPlaysDiagP1;
+    private int sumPlaysDiagP2;
+    private int sumPlaysAntiDiagP1;
+    private int sumPlaysAntiDiagP2;
+
     public Board(int size) {
         boardSize = size;
         positions = new Play[size][size];
@@ -87,20 +98,19 @@ public class Board {
                 return true;
         }
 
-        // check diagonals if odd board size
-        if(this.boardSize % 2 == 1) {
-            int playCountDiag = 0;
-            int playCountAntiDiag = 0;
-            for (int d = 0; d < boardSize; d++) {
-                if (positions[d][d].equals(play)) {
-                    playCountDiag++;
-                }
-                if (positions[d][(boardSize - 1) - d].equals(play)) {
-                    playCountAntiDiag++;
-                }
+        // check diagonals
+        int playCountDiag = 0;
+        int playCountAntiDiag = 0;
+        for (int d = 0; d < boardSize; d++) {
+            if (positions[d][d].equals(play)) {
+                playCountDiag++;
             }
-            if(playCountDiag == boardSize || playCountAntiDiag == boardSize)
-                return true;
+            if (positions[d][(boardSize - 1) - d].equals(play)) {
+                playCountAntiDiag++;
+            }
+        }
+        if(playCountDiag == boardSize || playCountAntiDiag == boardSize) {
+            return true;
         }
 
         return false;
