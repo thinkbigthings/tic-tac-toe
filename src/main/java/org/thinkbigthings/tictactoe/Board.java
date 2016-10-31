@@ -10,19 +10,17 @@ public class Board {
     public static class Slot {
         private int row=0;
         private int col=0;
-        public Slot(int r, int c) {
-            row = r;
-            col = c;
+        public Slot(int row, int col) {
+            this.row = row;
+            this.col = col;
         }
     }
 
-    public enum Play {
-
-        X("X"), O("O"), UNPLAYED(" ");
+    public static class PlayerToken {
 
         private String display;
 
-        Play(String s) {
+        public PlayerToken(String s) {
             display = s;
         }
 
@@ -33,7 +31,7 @@ public class Board {
     }
 
     private int boardSize;
-    private Play[][] positions;
+    private PlayerToken[][] positions;
 
     // play count tracking
     // TODO maybe move to own class?
@@ -48,10 +46,10 @@ public class Board {
 
     public Board(int size) {
         boardSize = size;
-        positions = new Play[size][size];
+        positions = new PlayerToken[size][size];
         for (int r = 0; r < size; r++) {
             for (int c = 0; c < size; c++) {
-                positions[r][c] = Play.UNPLAYED;
+                positions[r][c] = null;
             }
         }
     }
@@ -65,7 +63,7 @@ public class Board {
         int numberPlays = 0;
         for (int r = 0; r < boardSize; r++) {
             for (int c = 0; c < boardSize; c++) {
-                if(!positions[r][c].equals(Play.UNPLAYED)) {
+                if( positions[r][c] != null) {
                     numberPlays++;
                 }
             }
@@ -74,14 +72,15 @@ public class Board {
     }
 
     // TODO can check a winning play in O(1) if you track player counts by row/col as you make them
-    public boolean isWinner(Play play) {
+    public boolean isWinner(PlayerToken play) {
 
         // check rows
         for (int r = 0; r < boardSize; r++) {
             int playCount = 0;
             for (int c = 0; c < boardSize; c++) {
-                if(positions[r][c].equals(play))
+                if(play.equals(positions[r][c])) {
                     playCount++;
+                }
             }
             if(playCount == boardSize)
                 return true;
@@ -91,8 +90,9 @@ public class Board {
         for (int c = 0; c < boardSize; c++) {
             int playCount = 0;
             for (int r = 0; r < boardSize; r++) {
-                if(positions[r][c].equals(play))
+                if(play.equals(positions[r][c])) {
                     playCount++;
+                }
             }
             if(playCount == boardSize)
                 return true;
@@ -102,10 +102,10 @@ public class Board {
         int playCountDiag = 0;
         int playCountAntiDiag = 0;
         for (int d = 0; d < boardSize; d++) {
-            if (positions[d][d].equals(play)) {
+            if (play.equals(positions[d][d])) {
                 playCountDiag++;
             }
-            if (positions[d][(boardSize - 1) - d].equals(play)) {
+            if (play.equals(positions[d][(boardSize - 1) - d])) {
                 playCountAntiDiag++;
             }
         }
@@ -116,8 +116,8 @@ public class Board {
         return false;
     }
 
-    public Board withPlay(Slot position, Play player) {
-        if(!positions[position.row][position.col].equals(Play.UNPLAYED)) {
+    public Board withPlay(Slot position, PlayerToken player) {
+        if( positions[position.row][position.col] != null) {
             throw new IllegalArgumentException("Can't move here!");
         }
         Board newBoard = new Board(boardSize);
@@ -139,7 +139,8 @@ public class Board {
         StringBuffer string = new StringBuffer();
         for (int r = 0; r < boardSize; r++) {
             for (int c = 0; c < boardSize; c++) {
-                string.append(positions[r][c]);
+                String token = positions[r][c] == null ? " " : positions[r][c].toString();
+                string.append(token);
                 if(c < boardSize-1 ) {
                     string.append("|");
                 }

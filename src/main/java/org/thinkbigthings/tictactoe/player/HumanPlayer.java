@@ -8,19 +8,14 @@ import java.util.Scanner;
 public class HumanPlayer implements Player {
 
     private Scanner scanner;
-    private Board.Play playSymbol;
+    private Board.PlayerToken playSymbol;
 
     @Override
-    public Board.Play getPlaySymbol() {
+    public Board.PlayerToken getPlaySymbol() {
         return playSymbol;
     }
 
-    @Override
-    public String getPlaySymbolString() {
-        return playSymbol.toString();
-    }
-
-    public HumanPlayer(Board.Play symbol, InputStream in) {
+    public HumanPlayer(Board.PlayerToken symbol, InputStream in) {
         scanner = new Scanner(in);
         scanner.useDelimiter(System.lineSeparator());
         playSymbol = symbol;

@@ -14,7 +14,7 @@ public class BoardTest {
         Board empty = new Board(3);
         assertFalse(empty.isFull());
 
-        Board full = new Board(1).withPlay(new Board.Slot(0,0), Board.Play.X);
+        Board full = new Board(1).withPlay(new Board.Slot(0,0), new Board.PlayerToken("X"));
         assertTrue(full.isFull());
     }
 
@@ -28,11 +28,12 @@ public class BoardTest {
     @Test
     public void testIsWinnerEvenDiagonal() throws Exception {
 
+        Board.PlayerToken X = new Board.PlayerToken("X");
         Board board = new Board(4)
-                .withPlay(new Board.Slot(0,0), Board.Play.X)
-                .withPlay(new Board.Slot(1,1), Board.Play.X)
-                .withPlay(new Board.Slot(2,2), Board.Play.X)
-                .withPlay(new Board.Slot(3,3), Board.Play.X);
-        assertTrue(board.isWinner(Board.Play.X));
+                .withPlay(new Board.Slot(0,0), X)
+                .withPlay(new Board.Slot(1,1), X)
+                .withPlay(new Board.Slot(2,2), X)
+                .withPlay(new Board.Slot(3,3), X);
+        assertTrue(board.isWinner(X));
     }
 }

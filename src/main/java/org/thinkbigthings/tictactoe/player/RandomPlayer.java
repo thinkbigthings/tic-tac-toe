@@ -7,21 +7,16 @@ import java.util.Random;
 
 public class RandomPlayer implements Player {
 
-    private Board.Play playSymbol;
+    private Board.PlayerToken playSymbol;
     private final Random random = new Random();
 
     @Override
-    public Board.Play getPlaySymbol() {
+    public Board.PlayerToken getPlaySymbol() {
         return playSymbol;
     }
 
-    public RandomPlayer(Board.Play symbol) {
+    public RandomPlayer(Board.PlayerToken symbol) {
         playSymbol = symbol;
-    }
-
-    @Override
-    public String getPlaySymbolString() {
-        return playSymbol.toString();
     }
 
     @Override

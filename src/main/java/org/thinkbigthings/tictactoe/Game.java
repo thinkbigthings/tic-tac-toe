@@ -12,12 +12,12 @@ public class Game {
     int boardSize;
 
     public Game(GameConfig config) {
-        p1 = createPlayer(Board.Play.valueOf(config.getPlayer1Token()), config.getPlayer1Identity());
-        p2 = createPlayer(Board.Play.valueOf(config.getPlayer2Token()), config.getPlayer2Identity());
+        p1 = createPlayer(new Board.PlayerToken(config.getPlayer1Token()), config.getPlayer1Identity());
+        p2 = createPlayer(new Board.PlayerToken(config.getPlayer2Token()), config.getPlayer2Identity());
         boardSize = config.getBoardSize();
     }
 
-    protected Player createPlayer(Board.Play symbol, String identity) {
+    protected Player createPlayer(Board.PlayerToken symbol, String identity) {
         if(identity.equals("human")) {
             return new HumanPlayer(symbol, System.in);
         }
@@ -32,10 +32,6 @@ public class Game {
         Player currentPlayer = p1;
         Board currentBoard = new Board(boardSize);
 
-        // for 0.3.0
-        // TODO get player symbol from configuration instead of hard coding to board
-        // use p1/p2 to identify player instead of the enum
-        
         // TODO reduce complexity, start with Board.isWinner()
         // TODO remap jacoco task name to just "coverage"
         // TODO be able to run with gradlew bootRun (can't take input from standard in, though, maybe try java.io.Console?)
@@ -75,7 +71,7 @@ public class Game {
 
         while (gameInProgress) {
 
-            System.out.print("Player " + currentPlayer.getPlaySymbolString() + ": Enter your move: ");
+            System.out.print("Player " + currentPlayer.getPlaySymbol() + ": Enter your move: ");
 
             currentBoard = currentPlayer.getNextMove(currentBoard);
 
@@ -83,7 +79,7 @@ public class Game {
             System.out.println(currentBoard);
 
             if (currentBoard.isWinner(currentPlayer.getPlaySymbol())) {
-                System.out.println("PLAYER " + currentPlayer.getPlaySymbolString() + " WINS!!!");
+                System.out.println("PLAYER " + currentPlayer.getPlaySymbol() + " WINS!!!");
                 gameInProgress = false;
             } else if (currentBoard.isFull()) {
                 System.out.println("ITS A DRAW");
