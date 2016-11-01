@@ -44,12 +44,39 @@ public class Board {
     private int sumPlaysAntiDiagP1;
     private int sumPlaysAntiDiagP2;
 
+    public enum GameState {
+        WIN_PLAYER_1, WIN_PLAYER_2, DRAW, IN_PROGRESS;
+    }
+
+    public GameState getGameState(PlayerToken p1, PlayerToken p2) {
+        if(isWinner(p1)) {
+            return GameState.WIN_PLAYER_1;
+        }
+        else if(isWinner(p2)) {
+            return GameState.WIN_PLAYER_2;
+        }
+        else if(isFull()) {
+            return GameState.DRAW;
+        }
+        return GameState.IN_PROGRESS;
+    }
+
     public Board(int size) {
         boardSize = size;
         positions = new PlayerToken[size][size];
         for (int r = 0; r < size; r++) {
             for (int c = 0; c < size; c++) {
                 positions[r][c] = null;
+            }
+        }
+    }
+
+    public Board(Board toCopy) {
+        boardSize = toCopy.boardSize;
+        positions = new PlayerToken[boardSize][boardSize];
+        for (int r = 0; r < boardSize; r++) {
+            for (int c = 0; c < boardSize; c++) {
+                positions[r][c] = toCopy.positions[r][c];
             }
         }
     }
@@ -72,6 +99,7 @@ public class Board {
     }
 
     // TODO can check a winning play in O(1) if you track player counts by row/col as you make them
+    // starting with complexity 14
     public boolean isWinner(PlayerToken play) {
 
         // check rows
@@ -120,19 +148,9 @@ public class Board {
         if( positions[position.row][position.col] != null) {
             throw new IllegalArgumentException("Can't move here!");
         }
-        Board newBoard = new Board(boardSize);
-        newBoard.setPositions(this);
+        Board newBoard = new Board(this);
         newBoard.positions[position.row][position.col] = player;
         return newBoard;
-    }
-
-    // TODO is there a way to have a single method to iterate over cells that takes a lambda for assignments or tests?
-    private void setPositions(Board oldBoard) {
-        for (int r = 0; r < boardSize; r++) {
-            for (int c = 0; c < boardSize; c++) {
-                positions[r][c] = oldBoard.positions[r][c];
-            }
-        }
     }
 
     public String toString() {

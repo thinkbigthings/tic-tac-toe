@@ -32,13 +32,20 @@ public class Game {
         Player currentPlayer = p1;
         Board currentBoard = new Board(boardSize);
 
+        // for 0.3.1
+
+        // TODO use constructor injection for game config properties
+        // TODO unit test the Game with random players
+        // TODO write a ScoreKeeper to use behind the scenes of Board's gameState
+
+        // for 0.3.2
         // TODO reduce complexity, start with Board.isWinner()
         // TODO remap jacoco task name to just "coverage"
         // TODO be able to run with gradlew bootRun (can't take input from standard in, though, maybe try java.io.Console?)
         // http://stackoverflow.com/questions/13172137/console-application-with-java-and-gradle
         // TODO break build on decreasing code coverage
         // http://stackoverflow.com/questions/35540823/minimum-code-coverage-threshold-in-jacoco-gradle
-        // TODO be able to monitor with JMX, jconsole or other monitoring/recording
+        // TODO be able to monitor and record with JMX and jvisualvm
 
         // for 0.4.0
         // TODO write logs to a file instead of standard out so CLI UI is better.
@@ -67,26 +74,33 @@ public class Game {
 
         System.out.println(currentBoard);
 
-        boolean gameInProgress = true;
+        Board.GameState state = currentBoard.getGameState(p1.getPlaySymbol(), p2.getPlaySymbol());
 
-        while (gameInProgress) {
+        while (state.equals(Board.GameState.IN_PROGRESS)) {
 
             System.out.print("Player " + currentPlayer.getPlaySymbol() + ": Enter your move: ");
 
             currentBoard = currentPlayer.getNextMove(currentBoard);
+            currentPlayer = (currentPlayer == p1) ? p2 : p1;
 
             System.out.println();
             System.out.println(currentBoard);
 
-            if (currentBoard.isWinner(currentPlayer.getPlaySymbol())) {
-                System.out.println("PLAYER " + currentPlayer.getPlaySymbol() + " WINS!!!");
-                gameInProgress = false;
-            } else if (currentBoard.isFull()) {
-                System.out.println("ITS A DRAW");
-                gameInProgress = false;
+            state = currentBoard.getGameState(p1.getPlaySymbol(), p2.getPlaySymbol());
+            switch(state) {
+                case WIN_PLAYER_1:
+                    System.out.println("PLAYER " + p1.getPlaySymbol() + " WINS!!!");
+                    break;
+                case WIN_PLAYER_2:
+                    System.out.println("PLAYER " + p2.getPlaySymbol() + " WINS!!!");
+                    break;
+                case DRAW:
+                    System.out.println("ITS A DRAW");
+                    break;
+                case IN_PROGRESS:
+                    break;
             }
 
-            currentPlayer = (currentPlayer == p1) ? p2 : p1;
         }
 
         System.out.println();

@@ -37,6 +37,10 @@ public class GameConfig {
 	@Value("${player2.identity:human}")
 	private String player2Identity;
 
+	public GameConfig() {
+
+	}
+
 	public int getBoardSize() {
 		return boardSize;
 	}
