@@ -16,26 +16,22 @@
 
 package org.thinkbigthings.tictactoe;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
+@ConfigurationProperties(prefix="game")
 public class GameConfig {
 
-	@Value("${boardSize:3}")
-	private int boardSize;
+	// TODO be able to use immutable configuration
+    // https://github.com/spring-projects/spring-boot/issues/1254
+	// http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html
 
-	@Value("${player1.symbol:X}")
-	private String player1Token;
-
-	@Value("${player1.identity:human}")
-	private String player1Identity;
-
-	@Value("${player2.symbol:X}")
-	private String player2Token;
-
-	@Value("${player2.identity:human}")
-	private String player2Identity;
+	private int boardSize = 3;
+	private String tokenPlayer1 = "X";
+	private String tokenPlayer2 = "O";
+	private String identityPlayer1 = "human";
+	private String identityPlayer2 = "computer";
 
 	public GameConfig() {
 
@@ -45,19 +41,39 @@ public class GameConfig {
 		return boardSize;
 	}
 
-	public String getPlayer1Token() {
-		return player1Token;
+	public void setBoardSize(int boardSize) {
+		this.boardSize = boardSize;
 	}
 
-	public String getPlayer1Identity() {
-		return player1Identity;
+	public String getTokenPlayer1() {
+		return tokenPlayer1;
 	}
 
-	public String getPlayer2Token() {
-		return player2Token;
+	public void setTokenPlayer1(String tokenPlayer1) {
+		this.tokenPlayer1 = tokenPlayer1;
 	}
 
-	public String getPlayer2Identity() {
-		return player2Identity;
+	public String getTokenPlayer2() {
+		return tokenPlayer2;
+	}
+
+	public void setTokenPlayer2(String tokenPlayer2) {
+		this.tokenPlayer2 = tokenPlayer2;
+	}
+
+	public String getIdentityPlayer1() {
+		return identityPlayer1;
+	}
+
+	public void setIdentityPlayer1(String identityPlayer1) {
+		this.identityPlayer1 = identityPlayer1;
+	}
+
+	public String getIdentityPlayer2() {
+		return identityPlayer2;
+	}
+
+	public void setIdentityPlayer2(String identityPlayer2) {
+		this.identityPlayer2 = identityPlayer2;
 	}
 }

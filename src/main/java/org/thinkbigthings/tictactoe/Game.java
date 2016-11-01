@@ -5,15 +5,18 @@ import org.thinkbigthings.tictactoe.player.HumanPlayer;
 import org.thinkbigthings.tictactoe.player.Player;
 import org.thinkbigthings.tictactoe.player.RandomPlayer;
 
+import javax.inject.Inject;
+
 public class Game {
 
     private Player p1;
     private Player p2;
     int boardSize;
 
+    @Inject
     public Game(GameConfig config) {
-        p1 = createPlayer(new Board.PlayerToken(config.getPlayer1Token()), config.getPlayer1Identity());
-        p2 = createPlayer(new Board.PlayerToken(config.getPlayer2Token()), config.getPlayer2Identity());
+        p1 = createPlayer(new Board.PlayerToken(config.getTokenPlayer1()), config.getIdentityPlayer1());
+        p2 = createPlayer(new Board.PlayerToken(config.getTokenPlayer2()), config.getIdentityPlayer2());
         boardSize = config.getBoardSize();
     }
 
@@ -27,15 +30,13 @@ public class Game {
         throw new IllegalArgumentException("can't determine player identity from " + identity);
     }
 
-    public void play() {
+    public Board.GameState play() {
 
         Player currentPlayer = p1;
         Board currentBoard = new Board(boardSize);
 
         // for 0.3.1
 
-        // TODO use constructor injection for game config properties
-        // TODO unit test the Game with random players
         // TODO write a ScoreKeeper to use behind the scenes of Board's gameState
 
         // for 0.3.2
@@ -104,5 +105,7 @@ public class Game {
         }
 
         System.out.println();
+
+        return state;
     }
 }

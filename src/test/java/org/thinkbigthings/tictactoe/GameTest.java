@@ -12,9 +12,12 @@ public class GameTest {
     @Test
     public void testPlayRandomGame() throws Exception {
 
-//        GameConfig config = new GameConfig();
-//        Game game = new Game();
-//        game.play();
+        GameConfig config = new GameConfig();
+        config.setIdentityPlayer1("computer");
+        Game game = new Game(config);
+        Board.GameState endState = game.play();
+
+        assertNotEquals(Board.GameState.IN_PROGRESS, endState);
     }
 
 }
