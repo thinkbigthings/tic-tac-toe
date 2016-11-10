@@ -5,7 +5,7 @@ import org.thinkbigthings.tictactoe.player.HumanPlayer;
 import org.thinkbigthings.tictactoe.player.Player;
 import org.thinkbigthings.tictactoe.player.RandomPlayer;
 
-import javax.inject.Inject;
+import java.util.Optional;
 
 public class Game {
 
@@ -13,7 +13,6 @@ public class Game {
     private Player p2;
     int boardSize;
 
-    @Inject
     public Game(GameConfig config) {
         p1 = createPlayer(new Board.PlayerToken(config.getTokenPlayer1()), config.getIdentityPlayer1());
         p2 = createPlayer(new Board.PlayerToken(config.getTokenPlayer2()), config.getIdentityPlayer2());
@@ -30,17 +29,12 @@ public class Game {
         throw new IllegalArgumentException("can't determine player identity from " + identity);
     }
 
-    public Board.GameState play() {
+    public void play() {
 
         Player currentPlayer = p1;
         Board currentBoard = new Board(boardSize);
 
-        // for 0.3.1
-
-        // TODO write a ScoreKeeper to use behind the scenes of Board's gameState
-
         // for 0.3.2
-        // TODO reduce complexity, start with Board.isWinner()
         // TODO remap jacoco task name to just "coverage"
         // TODO be able to run with gradlew bootRun (can't take input from standard in, though, maybe try java.io.Console?)
         // http://stackoverflow.com/questions/13172137/console-application-with-java-and-gradle
@@ -49,7 +43,7 @@ public class Game {
         // TODO be able to monitor and record with JMX and jvisualvm
 
         // for 0.4.0
-        // TODO write logs to a file instead of standard out so CLI UI is better.
+        // TODO write logs to a file instead of standard out so CLI UI is better. Use lambdas / async logs
         // TODO use a tic tac toe image on startup
 
         // for 0.5.0
@@ -75,9 +69,9 @@ public class Game {
 
         System.out.println(currentBoard);
 
-        Board.GameState state = currentBoard.getGameState(p1.getPlaySymbol(), p2.getPlaySymbol());
+        boolean inProgress = true;
 
-        while (state.equals(Board.GameState.IN_PROGRESS)) {
+        while (inProgress) {
 
             System.out.print("Player " + currentPlayer.getPlaySymbol() + ": Enter your move: ");
 
@@ -87,25 +81,17 @@ public class Game {
             System.out.println();
             System.out.println(currentBoard);
 
-            state = currentBoard.getGameState(p1.getPlaySymbol(), p2.getPlaySymbol());
-            switch(state) {
-                case WIN_PLAYER_1:
-                    System.out.println("PLAYER " + p1.getPlaySymbol() + " WINS!!!");
-                    break;
-                case WIN_PLAYER_2:
-                    System.out.println("PLAYER " + p2.getPlaySymbol() + " WINS!!!");
-                    break;
-                case DRAW:
-                    System.out.println("ITS A DRAW");
-                    break;
-                case IN_PROGRESS:
-                    break;
-            }
+            inProgress = currentBoard.isMoveAvailable();
+        }
 
+        Optional<Board.PlayerToken> winner = currentBoard.getWinner();
+        if(winner.isPresent()) {
+            System.out.println("PLAYER " + winner.get() + " WINS!!!");
+        }
+        else {
+            System.out.println("ITS A DRAW");
         }
 
         System.out.println();
-
-        return state;
     }
 }

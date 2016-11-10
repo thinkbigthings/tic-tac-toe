@@ -29,12 +29,12 @@ public class BoardTest {
     }
 
     @Test
-    public void testIsLoserEvenDiagonal() throws Exception {
+    public void testIsLoserDiagonal() throws Exception {
         assertFalse(createWinningDiag().isWinner(O));
     }
 
     @Test
-    public void testIsWinnerEvenDiagonal() throws Exception {
+    public void testIsWinnerDiagonal() throws Exception {
         assertTrue(createWinningDiag().isWinner(X));
     }
 
@@ -56,28 +56,24 @@ public class BoardTest {
     private Board createWinningRow() throws Exception {
         return new Board(2)
                 .withPlay(new Board.Slot(0,0), X)
-                .withPlay(new Board.Slot(0,1), X)
-                .withPlay(new Board.Slot(1,1), O);
+                .withPlay(new Board.Slot(0,1), X);
     }
 
     private Board createWinningCol() throws Exception {
         return new Board(2)
                 .withPlay(new Board.Slot(0,0), X)
-                .withPlay(new Board.Slot(1,0), X)
-                .withPlay(new Board.Slot(1,1), O);
+                .withPlay(new Board.Slot(1,0), X);
     }
 
     private Board createWinningDiag() throws Exception {
         return new Board(2)
                 .withPlay(new Board.Slot(0,0), X)
-                .withPlay(new Board.Slot(1,1), X)
-                .withPlay(new Board.Slot(1,0), O);
+                .withPlay(new Board.Slot(1,1), X);
     }
 
     private Board createWinningAntiDiag() throws Exception {
         return new Board(2)
                 .withPlay(new Board.Slot(0,1), X)
-                .withPlay(new Board.Slot(1,0), X)
-                .withPlay(new Board.Slot(1,1), O);
+                .withPlay(new Board.Slot(1,0), X);
     }
 }

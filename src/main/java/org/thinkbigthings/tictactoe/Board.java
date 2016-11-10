@@ -1,9 +1,8 @@
 package org.thinkbigthings.tictactoe;
 
 
-/**
- * Created by young1 on 10/26/16.
- */
+import java.util.Optional;
+
 public class Board {
 
     // TODO call this slot or cell?
@@ -32,47 +31,26 @@ public class Board {
 
     private int boardSize;
     private PlayerToken[][] positions;
+    private int playCount = 0;
+    private Optional<PlayerToken> winner = Optional.empty();
+    private boolean moveAvailable = true;
 
-    // play count tracking
-    // TODO maybe move to own class?
-    private int[] sumPlaysPerRowP1;
-    private int[] sumPlaysPerRowP2;
-    private int[] sumPlaysPerColP1;
-    private int[] sumPlaysPerColP2;
-    private int sumPlaysDiagP1;
-    private int sumPlaysDiagP2;
-    private int sumPlaysAntiDiagP1;
-    private int sumPlaysAntiDiagP2;
-
-    public enum GameState {
-        WIN_PLAYER_1, WIN_PLAYER_2, DRAW, IN_PROGRESS;
+    public boolean isMoveAvailable() {
+        return moveAvailable;
     }
 
-    public GameState getGameState(PlayerToken p1, PlayerToken p2) {
-        if(isWinner(p1)) {
-            return GameState.WIN_PLAYER_1;
-        }
-        else if(isWinner(p2)) {
-            return GameState.WIN_PLAYER_2;
-        }
-        else if(isFull()) {
-            return GameState.DRAW;
-        }
-        return GameState.IN_PROGRESS;
+    public Optional<PlayerToken> getWinner() {
+        return winner;
     }
 
     public Board(int size) {
         boardSize = size;
         positions = new PlayerToken[size][size];
-        for (int r = 0; r < size; r++) {
-            for (int c = 0; c < size; c++) {
-                positions[r][c] = null;
-            }
-        }
     }
 
     public Board(Board toCopy) {
         boardSize = toCopy.boardSize;
+        playCount = toCopy.playCount;
         positions = new PlayerToken[boardSize][boardSize];
         for (int r = 0; r < boardSize; r++) {
             for (int c = 0; c < boardSize; c++) {
@@ -86,58 +64,41 @@ public class Board {
     }
 
     public boolean isFull() {
-        // TODO increment count of number of plays while playing so this is O(1)
-        int numberPlays = 0;
-        for (int r = 0; r < boardSize; r++) {
-            for (int c = 0; c < boardSize; c++) {
-                if( positions[r][c] != null) {
-                    numberPlays++;
-                }
-            }
-        }
-        return numberPlays == (boardSize * boardSize);
+        return playCount == (boardSize * boardSize);
     }
 
-    // TODO can check a winning play in O(1) if you track player counts by row/col as you make them
-    // starting with complexity 14
+    // TODO don't expose this if just for testing, to test, just get the winner
     public boolean isWinner(PlayerToken play) {
+        return winner.isPresent() ? winner.get().equals(play) : false;
+    }
 
-        // check rows
-        for (int r = 0; r < boardSize; r++) {
-            int playCount = 0;
-            for (int c = 0; c < boardSize; c++) {
-                if(play.equals(positions[r][c])) {
-                    playCount++;
-                }
-            }
-            if(playCount == boardSize)
-                return true;
-        }
+    // starting with complexity 14
+    private boolean isWinner(PlayerToken play, Slot position) {
 
-        // check cols
-        for (int c = 0; c < boardSize; c++) {
-            int playCount = 0;
-            for (int r = 0; r < boardSize; r++) {
-                if(play.equals(positions[r][c])) {
-                    playCount++;
-                }
-            }
-            if(playCount == boardSize)
-                return true;
-        }
-
-        // check diagonals
         int playCountDiag = 0;
         int playCountAntiDiag = 0;
-        for (int d = 0; d < boardSize; d++) {
-            if (play.equals(positions[d][d])) {
+        int rowPlayCount = 0;
+        int colPlayCount = 0;
+
+        for (int i = 0; i < boardSize; i++) {
+
+            // check diagonals
+            if (play.equals(positions[i][i])) {
                 playCountDiag++;
             }
-            if (play.equals(positions[d][(boardSize - 1) - d])) {
+            if (play.equals(positions[i][(boardSize - 1) - i])) {
                 playCountAntiDiag++;
             }
+            // check rows and columns
+            if(play.equals(positions[i][position.col])) {
+                colPlayCount++;
+            }
+            if(play.equals(positions[position.row][i])) {
+                rowPlayCount++;
+            }
         }
-        if(playCountDiag == boardSize || playCountAntiDiag == boardSize) {
+
+        if(playCountDiag == boardSize || playCountAntiDiag == boardSize || rowPlayCount == boardSize || colPlayCount == boardSize) {
             return true;
         }
 
@@ -145,11 +106,26 @@ public class Board {
     }
 
     public Board withPlay(Slot position, PlayerToken player) {
-        if( positions[position.row][position.col] != null) {
-            throw new IllegalArgumentException("Can't move here!");
+        if(!moveAvailable) {
+            throw new IllegalArgumentException("No moves are available");
         }
+        if( positions[position.row][position.col] != null) {
+            throw new IllegalArgumentException("Can't move here");
+        }
+
         Board newBoard = new Board(this);
         newBoard.positions[position.row][position.col] = player;
+        newBoard.playCount++;
+        newBoard.winner = winner;
+
+        if(newBoard.isWinner(player, position)) {
+            newBoard.winner = Optional.of(player);
+            newBoard.moveAvailable = false;
+        }
+        else if(isFull()) {
+            newBoard.moveAvailable = false;
+        }
+
         return newBoard;
     }
 

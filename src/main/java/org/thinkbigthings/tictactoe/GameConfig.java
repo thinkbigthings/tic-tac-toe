@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 public class GameConfig {
 
 	// TODO be able to use immutable configuration
-    // https://github.com/spring-projects/spring-boot/issues/1254
+    // https://github.com/spring-projects/spring-boot/issues/1254 (maybe in Spring Boot 2, due 2017?
 	// http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html
 
 	private int boardSize = 3;
