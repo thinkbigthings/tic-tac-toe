@@ -63,16 +63,11 @@ public class Board {
         return boardSize;
     }
 
-    public boolean isFull() {
+    // TODO remove if only used by test methods
+    private boolean isFull() {
         return playCount == (boardSize * boardSize);
     }
 
-    // TODO don't expose this if just for testing, to test, just get the winner
-    public boolean isWinner(PlayerToken play) {
-        return winner.isPresent() ? winner.get().equals(play) : false;
-    }
-
-    // starting with complexity 14
     private boolean isWinner(PlayerToken play, Slot position) {
 
         int playCountDiag = 0;

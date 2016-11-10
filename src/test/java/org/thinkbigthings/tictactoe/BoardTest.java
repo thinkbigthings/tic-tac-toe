@@ -12,16 +12,6 @@ public class BoardTest {
     private Board.PlayerToken O = new Board.PlayerToken("O");
 
     @Test
-    public void testFull() throws Exception {
-
-        Board empty = new Board(3);
-        assertFalse(empty.isFull());
-
-        Board full = new Board(1).withPlay(new Board.Slot(0,0), X);
-        assertTrue(full.isFull());
-    }
-
-    @Test
     public void testToString() throws Exception {
 
         Board board = new Board(1);
@@ -30,27 +20,27 @@ public class BoardTest {
 
     @Test
     public void testIsLoserDiagonal() throws Exception {
-        assertFalse(createWinningDiag().isWinner(O));
+        assertFalse(createWinningDiag().getWinner().get().equals(O));
     }
 
     @Test
     public void testIsWinnerDiagonal() throws Exception {
-        assertTrue(createWinningDiag().isWinner(X));
+        assertTrue(createWinningDiag().getWinner().get().equals(X));
     }
 
     @Test
     public void testIsWinnerAntiDiagonal() throws Exception {
-        assertTrue(createWinningAntiDiag().isWinner(X));
+        assertTrue(createWinningAntiDiag().getWinner().get().equals(X));
     }
 
     @Test
     public void testIsWinnerRow() throws Exception {
-        assertTrue(createWinningRow().isWinner(X));
+        assertTrue(createWinningRow().getWinner().get().equals(X));
     }
 
     @Test
     public void testIsWinnerColumn() throws Exception {
-        assertTrue(createWinningCol().isWinner(X));
+        assertTrue(createWinningCol().getWinner().get().equals(X));
     }
 
     private Board createWinningRow() throws Exception {

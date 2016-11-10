@@ -35,7 +35,6 @@ public class Game {
         Board currentBoard = new Board(boardSize);
 
         // for 0.3.2
-        // TODO remap jacoco task name to just "coverage"
         // TODO be able to run with gradlew bootRun (can't take input from standard in, though, maybe try java.io.Console?)
         // http://stackoverflow.com/questions/13172137/console-application-with-java-and-gradle
         // TODO break build on decreasing code coverage
