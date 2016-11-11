@@ -60,7 +60,7 @@ public class HumanPlayer implements Player {
                 else {
                     throw new IllegalArgumentException();
                 }
-                newBoard = currentBoard.withPlay(new Board.Slot(row, col), playSymbol);
+                newBoard = currentBoard.withPlay(new Board.Cell(row, col), playSymbol);
             }
             catch (Exception ex) {
                 System.out.println("I didn't understand " + entry + ", commands are tl, tm, tr, ml, mm, mr, bl, bm, br");

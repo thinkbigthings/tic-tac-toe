@@ -5,11 +5,10 @@ import java.util.Optional;
 
 public class Board {
 
-    // TODO call this slot or cell?
-    public static class Slot {
+    public static class Cell {
         private int row=0;
         private int col=0;
-        public Slot(int row, int col) {
+        public Cell(int row, int col) {
             this.row = row;
             this.col = col;
         }
@@ -63,12 +62,11 @@ public class Board {
         return boardSize;
     }
 
-    // TODO remove if only used by test methods
     private boolean isFull() {
         return playCount == (boardSize * boardSize);
     }
 
-    private boolean isWinner(PlayerToken play, Slot position) {
+    private boolean isWinner(PlayerToken play, Cell position) {
 
         int playCountDiag = 0;
         int playCountAntiDiag = 0;
@@ -100,7 +98,7 @@ public class Board {
         return false;
     }
 
-    public Board withPlay(Slot position, PlayerToken player) {
+    public Board withPlay(Cell position, PlayerToken player) {
         if(!moveAvailable) {
             throw new IllegalArgumentException("No moves are available");
         }

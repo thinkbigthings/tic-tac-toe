@@ -27,7 +27,7 @@ public class RandomPlayer implements Player {
             try {
                 int r = random.nextInt(currentBoard.size());
                 int c = random.nextInt(currentBoard.size());
-                return currentBoard.withPlay(new Board.Slot(r, c), playSymbol);
+                return currentBoard.withPlay(new Board.Cell(r, c), playSymbol);
             } catch (IllegalArgumentException ex) {
                 // keep trying
             }
