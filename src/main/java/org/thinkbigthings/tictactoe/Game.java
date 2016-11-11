@@ -50,19 +50,17 @@ public class Game {
         // TODO experiment with hot reloading
 
         // for 1.0
-        // TODO experiment with board sizes besides 3, command line entry doesn't work with letters, for example
-
-        // for 1.x
-
+        // TODO write a winning algorithm for the AI, optionally display chances of each player to win
         // TODO keep track of score between multiple games
 
-        // TODO write a winning algorithm for the AI, optionally display chances of each player to win
-
-        // TODO generalize to Gomoku (https://en.wikipedia.org/wiki/Tic-tac-toe)
 
         // for 2.x
 
         // TODO write a clickable interface with a web page
+
+        // TODO generalize to Gomoku (https://en.wikipedia.org/wiki/Tic-tac-toe)
+
+        // TODO experiment with board sizes besides 3
 
         // TODO use websockets
 
