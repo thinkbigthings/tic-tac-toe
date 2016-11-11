@@ -34,14 +34,6 @@ public class Board {
     private Optional<PlayerToken> winner = Optional.empty();
     private boolean moveAvailable = true;
 
-    public boolean isMoveAvailable() {
-        return moveAvailable;
-    }
-
-    public Optional<PlayerToken> getWinner() {
-        return winner;
-    }
-
     public Board(int size) {
         boardSize = size;
         positions = new PlayerToken[size][size];
@@ -58,8 +50,12 @@ public class Board {
         }
     }
 
-    public int size() {
-        return boardSize;
+    public boolean isMoveAvailable() {
+        return moveAvailable;
+    }
+
+    public Optional<PlayerToken> getWinner() {
+        return winner;
     }
 
     private boolean isFull() {
