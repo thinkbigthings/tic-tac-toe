@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 
 public class HumanPlayerTest {
 
-    private Board.PlayerToken X = new Board.PlayerToken("X");
+    private PlayerToken X = new PlayerToken("X");
 
     @Test
     public void testPlay() throws Exception {

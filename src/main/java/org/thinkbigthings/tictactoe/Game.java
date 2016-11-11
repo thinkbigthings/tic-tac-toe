@@ -8,7 +8,6 @@ import org.thinkbigthings.tictactoe.player.RandomPlayer;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Optional;
-import java.util.Scanner;
 
 public class Game {
 
@@ -17,12 +16,12 @@ public class Game {
     int boardSize;
 
     public Game(GameConfig config) {
-        p1 = createPlayer(new Board.PlayerToken(config.getTokenPlayer1()), config.getIdentityPlayer1(), config);
-        p2 = createPlayer(new Board.PlayerToken(config.getTokenPlayer2()), config.getIdentityPlayer2(), config);
+        p1 = createPlayer(new PlayerToken(config.getTokenPlayer1()), config.getIdentityPlayer1(), config);
+        p2 = createPlayer(new PlayerToken(config.getTokenPlayer2()), config.getIdentityPlayer2(), config);
         boardSize = config.getBoardSize();
     }
 
-    protected Player createPlayer(Board.PlayerToken symbol, String identity, GameConfig config) {
+    protected Player createPlayer(PlayerToken symbol, String identity, GameConfig config) {
         if(identity.equals("human")) {
             return new HumanPlayer(symbol, new BufferedReader(new InputStreamReader(System.in)));
         }
@@ -84,7 +83,7 @@ public class Game {
             inProgress = currentBoard.isMoveAvailable();
         }
 
-        Optional<Board.PlayerToken> winner = currentBoard.getWinner();
+        Optional<PlayerToken> winner = currentBoard.getWinner();
         if(winner.isPresent()) {
             System.out.println("PLAYER " + winner.get() + " WINS!!!");
         }

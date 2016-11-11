@@ -8,8 +8,8 @@ import static org.junit.Assert.assertTrue;
 
 public class BoardTest {
 
-    private Board.PlayerToken X = new Board.PlayerToken("X");
-    private Board.PlayerToken O = new Board.PlayerToken("O");
+    private PlayerToken X = new PlayerToken("X");
+    private PlayerToken O = new PlayerToken("O");
 
     @Test
     public void testToString() throws Exception {

@@ -2,21 +2,22 @@ package org.thinkbigthings.tictactoe.player;
 
 
 import org.thinkbigthings.tictactoe.Board;
+import org.thinkbigthings.tictactoe.PlayerToken;
 
 import java.util.Random;
 
 public class RandomPlayer implements Player {
 
-    private Board.PlayerToken playSymbol;
+    private PlayerToken playSymbol;
     private final Random random = new Random();
     private int boardSize;
 
     @Override
-    public Board.PlayerToken getPlaySymbol() {
+    public PlayerToken getPlaySymbol() {
         return playSymbol;
     }
 
-    public RandomPlayer(Board.PlayerToken symbol, int size) {
+    public RandomPlayer(PlayerToken symbol, int size) {
         playSymbol = symbol;
         boardSize = size;
     }

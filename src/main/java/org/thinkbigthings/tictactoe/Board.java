@@ -14,20 +14,6 @@ public class Board {
         }
     }
 
-    public static class PlayerToken {
-
-        private String display;
-
-        public PlayerToken(String s) {
-            display = s;
-        }
-
-        @Override
-        public String toString() {
-            return display;
-        }
-    }
-
     private int boardSize;
     private PlayerToken[][] positions;
     private int playCount = 0;
