@@ -64,34 +64,19 @@ public class Board {
 
     private boolean isWinner(PlayerToken play, Cell position) {
 
-        int playCountDiag = 0;
-        int playCountAntiDiag = 0;
-        int rowPlayCount = 0;
-        int colPlayCount = 0;
+        boolean allRow = true;
+        boolean allCol = true;
+        boolean allDiag = true;
+        boolean allAntiDiag = true;
 
         for (int i = 0; i < boardSize; i++) {
-
-            // check diagonals
-            if (play.equals(positions[i][i])) {
-                playCountDiag++;
-            }
-            if (play.equals(positions[i][(boardSize - 1) - i])) {
-                playCountAntiDiag++;
-            }
-            // check rows and columns
-            if(play.equals(positions[i][position.col])) {
-                colPlayCount++;
-            }
-            if(play.equals(positions[position.row][i])) {
-                rowPlayCount++;
-            }
+            allDiag &= play.equals(positions[i][i]);
+            allAntiDiag &= play.equals(positions[i][(boardSize - 1) - i]);
+            allCol &= play.equals(positions[i][position.col]);
+            allRow &= play.equals(positions[position.row][i]);
         }
 
-        if(playCountDiag == boardSize || playCountAntiDiag == boardSize || rowPlayCount == boardSize || colPlayCount == boardSize) {
-            return true;
-        }
-
-        return false;
+        return allRow || allCol || allDiag || allAntiDiag;
     }
 
     public Board withPlay(Cell position, PlayerToken player) {
