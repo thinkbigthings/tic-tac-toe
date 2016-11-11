@@ -2,12 +2,12 @@ package org.thinkbigthings.tictactoe.player;
 
 import org.thinkbigthings.tictactoe.Board;
 
-import java.io.InputStream;
-import java.util.Scanner;
+import java.io.BufferedReader;
 
 public class HumanPlayer implements Player {
 
-    private Scanner scanner;
+    // System.console() and Scanner are final, can't mock, so using BufferedReader instead
+    private BufferedReader input;
     private Board.PlayerToken playSymbol;
 
     @Override
@@ -15,9 +15,8 @@ public class HumanPlayer implements Player {
         return playSymbol;
     }
 
-    public HumanPlayer(Board.PlayerToken symbol, InputStream in) {
-        scanner = new Scanner(in);
-        scanner.useDelimiter(System.lineSeparator());
+    public HumanPlayer(Board.PlayerToken symbol, BufferedReader reader) {
+        input = reader;
         playSymbol = symbol;
     }
 
@@ -30,7 +29,7 @@ public class HumanPlayer implements Player {
 
             try {
 
-                entry = scanner.next().trim();
+                entry = input.readLine().trim();
 
                 int row = 0;
                 int col = 0;

@@ -5,7 +5,10 @@ import org.thinkbigthings.tictactoe.player.HumanPlayer;
 import org.thinkbigthings.tictactoe.player.Player;
 import org.thinkbigthings.tictactoe.player.RandomPlayer;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Optional;
+import java.util.Scanner;
 
 public class Game {
 
@@ -21,7 +24,7 @@ public class Game {
 
     protected Player createPlayer(Board.PlayerToken symbol, String identity, GameConfig config) {
         if(identity.equals("human")) {
-            return new HumanPlayer(symbol, System.in);
+            return new HumanPlayer(symbol, new BufferedReader(new InputStreamReader(System.in)));
         }
         if(identity.equals("computer")) {
             return new RandomPlayer(symbol, config.getBoardSize());

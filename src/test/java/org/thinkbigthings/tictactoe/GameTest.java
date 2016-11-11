@@ -14,6 +14,8 @@ public class GameTest {
         Game game = new Game(config);
         game.play();
 
+        // TODO this is basically an integration test that implicitly asserts that no exceptions are thrown during a normal game
+        // should try to explicitly assert something about the code.
     }
 
 }
