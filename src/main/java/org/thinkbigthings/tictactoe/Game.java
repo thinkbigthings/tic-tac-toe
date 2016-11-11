@@ -37,10 +37,10 @@ public class Game {
         Board currentBoard = new Board(boardSize);
 
         // for 0.3.2
-        // TODO break build on decreasing code coverage
-        // http://stackoverflow.com/questions/35540823/minimum-code-coverage-threshold-in-jacoco-gradle
         // TODO be able to monitor and record with JMX and jvisualvm
         // TODO run with profiler
+        // TODO break build on decreasing code coverage
+        // http://stackoverflow.com/questions/35540823/minimum-code-coverage-threshold-in-jacoco-gradle
 
         // for 0.4.0
         // TODO write logs to a file instead of standard out so CLI UI is better. Use lambdas / async logs
