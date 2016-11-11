@@ -37,11 +37,10 @@ public class Game {
         Board currentBoard = new Board(boardSize);
 
         // for 0.3.2
-        // TODO be able to run with gradlew bootRun (can't take input from standard in, though, maybe try java.io.Console?)
-        // http://stackoverflow.com/questions/13172137/console-application-with-java-and-gradle
         // TODO break build on decreasing code coverage
         // http://stackoverflow.com/questions/35540823/minimum-code-coverage-threshold-in-jacoco-gradle
         // TODO be able to monitor and record with JMX and jvisualvm
+        // TODO run with profiler
 
         // for 0.4.0
         // TODO write logs to a file instead of standard out so CLI UI is better. Use lambdas / async logs

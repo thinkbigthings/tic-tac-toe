@@ -5,9 +5,12 @@ Classic Tic Tac Toe game
 
 Build with gradlew clean build
 
+Build with test coverage: gradlew clean test jacocoTestReport
+
+Run with gradlew bootRun -q
+
 Run with java -jar build/libs/tic-tac-toe-x.y.z.jar
 
-Build with test coverage: gradlew clean test jacocoTestReport
 
 
 ## Run the game

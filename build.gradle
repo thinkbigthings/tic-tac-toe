@@ -61,3 +61,8 @@ jacocoTestReport {
 	}
 }
 
+// This lets you run gradlew bootRun -q and use standard input (otherwise standard in won't work)
+// If this ever becomes not a console application, you won't need this block
+bootRun {
+	standardInput = System.in
+}
