@@ -42,6 +42,8 @@ repositories {
 dependencies {
 	compile("javax.inject:javax.inject:1")
 	compile("org.springframework.boot:spring-boot-starter")
+	compile("org.springframework.boot:spring-boot-starter-actuator")
+
 	testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 

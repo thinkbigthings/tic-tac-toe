@@ -16,17 +16,17 @@ public class Game {
     int boardSize;
 
     public Game(GameConfig config) {
-        p1 = createPlayer(new PlayerToken(config.getTokenPlayer1()), config.getIdentityPlayer1(), config);
-        p2 = createPlayer(new PlayerToken(config.getTokenPlayer2()), config.getIdentityPlayer2(), config);
+        p1 = createPlayer(new PlayerToken(config.getTokenPlayer1()), config.getIdentityPlayer1());
+        p2 = createPlayer(new PlayerToken(config.getTokenPlayer2()), config.getIdentityPlayer2());
         boardSize = config.getBoardSize();
     }
 
-    protected Player createPlayer(PlayerToken symbol, String identity, GameConfig config) {
+    protected Player createPlayer(PlayerToken symbol, String identity) {
         if(identity.equals("human")) {
             return new HumanPlayer(symbol, new BufferedReader(new InputStreamReader(System.in)));
         }
         if(identity.equals("computer")) {
-            return new RandomPlayer(symbol, config.getBoardSize());
+            return new RandomPlayer(symbol);
         }
         throw new IllegalArgumentException("can't determine player identity from " + identity);
     }

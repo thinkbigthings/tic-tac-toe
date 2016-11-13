@@ -1,6 +1,8 @@
 package org.thinkbigthings.tictactoe;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class Board {
@@ -34,6 +36,18 @@ public class Board {
                 positions[r][c] = toCopy.positions[r][c];
             }
         }
+    }
+
+    public List<Cell> getAvailableMoves() {
+        List<Cell> moves = new ArrayList<>();
+        for (int r = 0; r < boardSize; r++) {
+            for (int c = 0; c < boardSize; c++) {
+                if(positions[r][c] != null) {
+                    moves.add(new Cell(r,c));
+                }
+            }
+        }
+        return moves;
     }
 
     public boolean isMoveAvailable() {
