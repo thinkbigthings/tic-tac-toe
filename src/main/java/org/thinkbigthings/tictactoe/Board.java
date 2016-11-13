@@ -42,7 +42,7 @@ public class Board {
         List<Cell> moves = new ArrayList<>();
         for (int r = 0; r < boardSize; r++) {
             for (int c = 0; c < boardSize; c++) {
-                if(positions[r][c] != null) {
+                if(positions[r][c] == null) {
                     moves.add(new Cell(r,c));
                 }
             }
