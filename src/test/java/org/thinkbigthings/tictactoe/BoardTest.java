@@ -12,8 +12,13 @@ public class BoardTest {
     private PlayerToken O = new PlayerToken("O");
 
     @Test
-    public void testToString() throws Exception {
+    public void testNoMovesAfterWin() throws Exception {
+        assertFalse(createWinningRow().isMoveAvailable());
+        assertTrue(createWinningRow().getAvailableMoves().isEmpty());
+    }
 
+    @Test
+    public void testToString() throws Exception {
         Board board = new Board(1);
         assertNotNull(board.toString());
     }

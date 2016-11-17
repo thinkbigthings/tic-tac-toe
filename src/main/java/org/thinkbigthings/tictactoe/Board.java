@@ -40,10 +40,12 @@ public class Board {
 
     public List<Cell> getAvailableMoves() {
         List<Cell> moves = new ArrayList<>();
-        for (int r = 0; r < boardSize; r++) {
-            for (int c = 0; c < boardSize; c++) {
-                if(positions[r][c] == null) {
-                    moves.add(new Cell(r,c));
+        if(moveAvailable) {
+            for (int r = 0; r < boardSize; r++) {
+                for (int c = 0; c < boardSize; c++) {
+                    if(positions[r][c] == null) {
+                        moves.add(new Cell(r,c));
+                    }
                 }
             }
         }

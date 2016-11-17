@@ -30,7 +30,6 @@ public class PerfectPlayer implements Player {
 
     public Node<Board> buildGameTree() {
 
-        // TODO be able to build a tree
         // TODO be able to build a tree with players taking turns
 
         return buildGameTree(new Node<>(new Board(boardSize)));
@@ -44,10 +43,6 @@ public class PerfectPlayer implements Player {
     }
 
     public Set<Board> getAvailableMoves(Board parent, PlayerToken nextPlayer) {
-
-        // FIXME getting an error that no moves are available
-        // but if move is not available, stream is empty, right?
-
         return parent.getAvailableMoves()
                 .stream()
                 .map(c -> parent.withPlay(c, nextPlayer))
