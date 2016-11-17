@@ -1,6 +1,8 @@
-package org.thinkbigthings.tictactoe;
+package org.thinkbigthings.tictactoe.player;
 
 import org.junit.Test;
+import org.thinkbigthings.tictactoe.Board;
+import org.thinkbigthings.tictactoe.PlayerToken;
 import org.thinkbigthings.tictactoe.player.HumanPlayer;
 import org.thinkbigthings.tictactoe.player.Player;
 

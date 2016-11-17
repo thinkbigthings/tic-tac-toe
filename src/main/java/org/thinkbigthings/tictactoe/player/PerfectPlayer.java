@@ -28,18 +28,26 @@ public class PerfectPlayer implements Player {
         buildGameTree();
     }
 
-    public void buildGameTree() {
+    public Node<Board> buildGameTree() {
 
-        Board board = new Board(boardSize);
+        // TODO be able to build a tree
+        // TODO be able to build a tree with players taking turns
 
-        Node<Board> tree = new Node<>(board, getAvailableMoves(board, playSymbol));
+        return buildGameTree(new Node<>(new Board(boardSize)));
+
     }
-    
-    public void buildGameTree(Node<Board> parent) {
-        
+
+    public Node<Board> buildGameTree(Node<Board> parent) {
+        parent.setChildren(parent.asNodes(getAvailableMoves(parent.getContent(), playSymbol)));
+        parent.getChildren().stream().forEach(c -> buildGameTree(c));
+        return parent;
     }
 
     public Set<Board> getAvailableMoves(Board parent, PlayerToken nextPlayer) {
+
+        // FIXME getting an error that no moves are available
+        // but if move is not available, stream is empty, right?
+
         return parent.getAvailableMoves()
                 .stream()
                 .map(c -> parent.withPlay(c, nextPlayer))
@@ -52,14 +60,29 @@ public class PerfectPlayer implements Player {
     }
 
     public static class Node<T> {
-        private T node;
-        private Set<T> children = new HashSet<>();
-        public Node(T parent, Set<T> subnodes) {
-            node = parent;
-            children = subnodes;
+
+        private T content;
+        private Set<Node<T>> children = new HashSet<>();
+
+        public Node(T nodeContent) {
+            content = nodeContent;
         }
-        public Set<T> getChildren() {
+
+        public T getContent() {
+            return content;
+        }
+
+        public Set<Node<T>> getChildren() {
             return children;
+        }
+
+        public void setChildren(Set<Node<T>> newChildren) {
+            children.clear();
+            children.addAll(newChildren);
+        }
+
+        public Set<Node<T>> asNodes(Set<T> contents) {
+            return contents.stream().map(t -> new Node<T>(t)).collect(Collectors.toSet());
         }
     }
 
