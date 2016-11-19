@@ -2,6 +2,7 @@ package org.thinkbigthings.tictactoe;
 
 
 import org.thinkbigthings.tictactoe.player.HumanPlayer;
+import org.thinkbigthings.tictactoe.player.PerfectPlayer;
 import org.thinkbigthings.tictactoe.player.Player;
 import org.thinkbigthings.tictactoe.player.RandomPlayer;
 
@@ -27,6 +28,9 @@ public class Game {
         }
         if(identity.equals("computer")) {
             return new RandomPlayer(symbol);
+        }
+        if(identity.equals("ai")) {
+            return new PerfectPlayer(symbol);
         }
         throw new IllegalArgumentException("can't determine player identity from " + identity);
     }

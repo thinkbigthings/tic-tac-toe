@@ -15,7 +15,7 @@ public class PerfectPlayer implements Player {
     private PlayerToken playSymbol;
     private PlayerToken opponent = new PlayerToken(UUID.randomUUID().toString());
 
-    public PerfectPlayer(PlayerToken symbol, int size) {
+    public PerfectPlayer(PlayerToken symbol) {
         playSymbol = symbol;
     }
 
@@ -26,7 +26,8 @@ public class PerfectPlayer implements Player {
 
     @Override
     public Board getNextMove(Board currentBoard) {
-        return currentBoard;
+        BoardTree tree = new BoardTree(playSymbol, opponent);
+        return tree.getBestBoardForPlayer(currentBoard, playSymbol);
     }
 
 
@@ -44,10 +45,12 @@ public class PerfectPlayer implements Player {
         public Board getBestBoardForPlayer(Board currentBoard, PlayerToken player) {
 
 
-            // TODO fix nextPlayer() to work with this.
+            // TODO would prefer to get player as current player instead of from argument
+            // but I think this should work for now
 
-            // TODO maybe want to just get the next move/slot and return that instead of the board. Should we rework Player to do that too?
-            // TODO I think for this use case we can just diff getAvailableMoves() from current and next boards
+            // TODO maybe want to just get the next move/slot and return that instead of the board
+            // rework Player to return desired slot instead of a new board.
+            // we can just diff getAvailableMoves() from current and next boards
 
             Node<Board> gameTree = buildGameTree(new Node<>(currentBoard), player);
 
@@ -64,16 +67,16 @@ public class PerfectPlayer implements Player {
 
         /**
          *
-         * @param root should already have its content set
+         * @param currentBoard should already have its content set
          * @param player player to use for all children of root
          * @return root that's populated.
          */
-        public Node<Board> buildGameTree(Node<Board> root, PlayerToken player) {
+        public Node<Board> buildGameTree(Node<Board> currentBoard, PlayerToken player) {
             PlayerToken nextPlayer = nextPlayer(player);
             // TODO with all the references to root, maybe this should be moved into that class
-            root.setChildren(root.asNodes(getAvailableMoves(root.getContent(), player)));
-            root.getChildren().stream().forEach(c -> buildGameTree(c, nextPlayer));
-            return root;
+            currentBoard.setChildren(currentBoard.asNodes(getAvailableMoves(currentBoard.getContent(), player)));
+            currentBoard.getChildren().stream().forEach(c -> buildGameTree(c, nextPlayer));
+            return currentBoard;
         }
 
         public PlayerToken nextPlayer(PlayerToken previousPlayer) {
