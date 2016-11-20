@@ -12,10 +12,7 @@ public class GameTest {
         GameConfig config = new GameConfig();
         config.setIdentityPlayer1("computer");
 
-        // FIXME this is broken because it occasionally breaks at the end of a game.
-
         for(int i=0; i < 100; i++) {
-            System.out.println("-------- GAME " + i);
             Game game = new Game(config);
             game.play();
         }

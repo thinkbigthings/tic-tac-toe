@@ -24,6 +24,11 @@ public class RandomPlayer implements Player {
     @Override
     public Board getNextMove(Board currentBoard) {
         List<Board.Cell> moves = currentBoard.getAvailableMoves();
+
+        if(moves.isEmpty()) {
+            throw new IllegalArgumentException("Board has no available moves");
+        }
+
         Board.Cell nextMove = moves.get(random.nextInt(moves.size()));
         return currentBoard.withPlay(nextMove, playSymbol);
     }
