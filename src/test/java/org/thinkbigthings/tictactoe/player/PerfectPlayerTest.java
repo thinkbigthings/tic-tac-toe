@@ -29,6 +29,10 @@ public class PerfectPlayerTest {
         board = p1.getNextMove(board);
         board = p2.getNextMove(board);
         board = p1.getNextMove(board);
+
+        // FIXME this fails because perfect player isn't perfect
+        // it tries to find game path with most potential winning moves instead of closest winning move
+
 System.out.println(board);
         assertTrue(board.getWinner().get().equals(p1));
     }
