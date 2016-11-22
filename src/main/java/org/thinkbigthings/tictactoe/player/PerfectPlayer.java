@@ -44,7 +44,6 @@ public class PerfectPlayer implements Player {
 
         public Board getBestBoardForPlayer(Board currentBoard, PlayerToken player) {
 
-
             // TODO would prefer to get player as current player instead of from argument
             // but I think this should work for now
 
@@ -54,12 +53,18 @@ public class PerfectPlayer implements Player {
 
             Node<Board> gameTree = buildGameTree(new Node<>(currentBoard), player);
 
-            long maxWins = 0;
+            int movesToClosestWin = Integer.MAX_VALUE;
             Board nextBoard = gameTree.getChildren().iterator().next().getContent();
+
             // TODO can we do this loop with a stream?
+
+            // FIXME countMoves came back as 0 when it should have been 1.
+
             for(Node<Board> child : gameTree.getChildren()) {
-                if(getNumberWinningBoards(child, player) > maxWins) {
+                int currentMovesToWin = countMovesToClosestWin(child, player);
+                if(currentMovesToWin < movesToClosestWin) {
                     nextBoard = child.getContent();
+                    movesToClosestWin = currentMovesToWin;
                 }
             }
             return nextBoard;
@@ -73,7 +78,9 @@ public class PerfectPlayer implements Player {
          */
         public Node<Board> buildGameTree(Node<Board> currentBoard, PlayerToken player) {
             PlayerToken nextPlayer = nextPlayer(player);
+
             // TODO with all the references to root, maybe this should be moved into that class
+
             currentBoard.setChildren(currentBoard.asNodes(getAvailableMoves(currentBoard.getContent(), player)));
             currentBoard.getChildren().stream().forEach(c -> buildGameTree(c, nextPlayer));
             return currentBoard;
@@ -88,6 +95,18 @@ public class PerfectPlayer implements Player {
                     .map(n -> n.getContent())
                     .filter(b -> player.equals(b.getWinner().orElse(null)))
                     .count();
+        }
+
+        // TODO if counting number of available moves is too cpu intensive,
+        // could track that number inside the board and return directly
+        public int countMovesToClosestWin(Node<Board> node, PlayerToken player) {
+            final int rootNumMovesAvailable = node.getContent().getAvailableMoves().size();
+            OptionalInt distance = node.stream()
+                    .map(n -> n.getContent())
+                    .filter(b -> player.equals(b.getWinner().orElse(null)))
+                    .mapToInt(b -> rootNumMovesAvailable - b.getAvailableMoves().size())
+                    .min();
+            return distance.orElse(Integer.MAX_VALUE);
         }
 
         public Set<Board> getAvailableMoves(Board parent, PlayerToken player) {
@@ -125,22 +144,12 @@ public class PerfectPlayer implements Player {
             return contents.stream().map(t -> new Node<T>(t)).collect(Collectors.toSet());
         }
 
-        // TODO return all nodes in depth first traversal, starting with this
-
-
         /**
-         * // Get all values in the tree:
-         t.stream().map(Tree::getContent).collect(toList());
-
-         // Get even values:
-         t.flattened().map(Tree::getContent).filter(v -> v % 2 == 0).collect(toList());
-
-         // Sum of even values:
-         t.flattened().map(Tree::getContent).filter(v -> v % 2 == 0).reduce((a, b) -> a + b);
-
-         // Does it contain 13?
-         t.flattened().anyMatch(t -> t.getContent() == 13);
-
+         * Can use a stream to map, filter, reduce, anyMatch, collect...
+         *
+         * e.g. get all values in a list:
+         * t.stream().map(Tree::getContent).collect(toList());
+         *
          * @return all nodes in the tree including this
          */
         public Stream<Node<T>> stream() {
@@ -150,9 +159,7 @@ public class PerfectPlayer implements Player {
             // https://docs.oracle.com/javase/8/docs/api/java/util/stream/StreamSupport.html
             // https://docs.oracle.com/javase/8/docs/api/java/util/Spliterators.AbstractSpliterator.html
 
-            return Stream.concat(
-                    Stream.of(this),
-                    children.stream().flatMap(Node::stream));
+            return Stream.concat(Stream.of(this), children.stream().flatMap(Node::stream));
         }
     }
 

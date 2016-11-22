@@ -17,24 +17,35 @@ public class PerfectPlayerTest {
     private PlayerToken O = new PlayerToken("O");
 
     @Test
-    public void testPlay() throws Exception {
+    public void testPlayHorizontal() throws Exception {
 
-        Board board = new Board(3);
+        Board board = new Board(3)
+                .withPlay(new Board.Cell(0,0), X)
+                .withPlay(new Board.Cell(1,1), O)
+                .withPlay(new Board.Cell(0,1), X)
+                .withPlay(new Board.Cell(1,0), O);
 
         Player p1 = new PerfectPlayer(X);
-        Player p2 = new RandomPlayer(O);
 
         board = p1.getNextMove(board);
-        board = p2.getNextMove(board);
-        board = p1.getNextMove(board);
-        board = p2.getNextMove(board);
+
+        assertEquals(p1.getPlaySymbol(), board.getWinner().get());
+    }
+
+    @Test
+    public void testPlayVertical() throws Exception {
+
+        Board board = new Board(3)
+                .withPlay(new Board.Cell(0,0), X)
+                .withPlay(new Board.Cell(0,1), O)
+                .withPlay(new Board.Cell(1,0), X)
+                .withPlay(new Board.Cell(1,1), O);
+
+        Player p1 = new PerfectPlayer(X);
+
         board = p1.getNextMove(board);
 
-        // FIXME this fails because perfect player isn't perfect
-        // it tries to find game path with most potential winning moves instead of closest winning move
-
-System.out.println(board);
-        assertTrue(board.getWinner().get().equals(p1));
+        assertEquals(p1.getPlaySymbol(), board.getWinner().get());
     }
 
 }
