@@ -30,6 +30,7 @@ public class Board {
     public Board(Board toCopy) {
         boardSize = toCopy.boardSize;
         playCount = toCopy.playCount;
+        winner = toCopy.winner;
         positions = new PlayerToken[boardSize][boardSize];
         for (int r = 0; r < boardSize; r++) {
             for (int c = 0; c < boardSize; c++) {
@@ -40,10 +41,12 @@ public class Board {
 
     public List<Cell> getAvailableMoves() {
         List<Cell> moves = new ArrayList<>();
-        for (int r = 0; r < boardSize; r++) {
-            for (int c = 0; c < boardSize; c++) {
-                if(positions[r][c] == null) {
-                    moves.add(new Cell(r,c));
+        if(moveAvailable) {
+            for (int r = 0; r < boardSize; r++) {
+                for (int c = 0; c < boardSize; c++) {
+                    if(positions[r][c] == null) {
+                        moves.add(new Cell(r,c));
+                    }
                 }
             }
         }
@@ -90,13 +93,12 @@ public class Board {
         Board newBoard = new Board(this);
         newBoard.positions[position.row][position.col] = player;
         newBoard.playCount++;
-        newBoard.winner = winner;
 
         if(newBoard.isWinner(player, position)) {
             newBoard.winner = Optional.of(player);
             newBoard.moveAvailable = false;
         }
-        else if(isFull()) {
+        else if(newBoard.isFull()) {
             newBoard.moveAvailable = false;
         }
 
