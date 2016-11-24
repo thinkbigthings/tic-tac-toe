@@ -40,7 +40,7 @@ public class Game {
         Player currentPlayer = p1;
         Board currentBoard = new Board(boardSize);
 
-        // for 0.3.2
+        // for 0.3.3
         // TODO be able to monitor and record with JMX and jvisualvm
         // TODO run with profiler
         // TODO break build on decreasing code coverage
@@ -55,7 +55,8 @@ public class Game {
         // TODO experiment with hot reloading
 
         // for 1.0
-        // TODO write a winning algorithm for the AI, optionally display chances of each player to win
+        // TODO improve algorithm for the AI
+        // account for number of ways to win besides just nearest win, account for blocking opponent imminent win
         // TODO keep track of score between multiple games
 
 
