@@ -50,25 +50,25 @@ public class BoardTest {
 
     private Board createWinningRow() throws Exception {
         return new Board(2)
-                .withPlay(new Board.Cell(0,0), X)
-                .withPlay(new Board.Cell(0,1), X);
+                .withPlay(new Cell(0,0), X)
+                .withPlay(new Cell(0,1), X);
     }
 
     private Board createWinningCol() throws Exception {
         return new Board(2)
-                .withPlay(new Board.Cell(0,0), X)
-                .withPlay(new Board.Cell(1,0), X);
+                .withPlay(new Cell(0,0), X)
+                .withPlay(new Cell(1,0), X);
     }
 
     private Board createWinningDiag() throws Exception {
         return new Board(2)
-                .withPlay(new Board.Cell(0,0), X)
-                .withPlay(new Board.Cell(1,1), X);
+                .withPlay(new Cell(0,0), X)
+                .withPlay(new Cell(1,1), X);
     }
 
     private Board createWinningAntiDiag() throws Exception {
         return new Board(2)
-                .withPlay(new Board.Cell(0,1), X)
-                .withPlay(new Board.Cell(1,0), X);
+                .withPlay(new Cell(0,1), X)
+                .withPlay(new Cell(1,0), X);
     }
 }

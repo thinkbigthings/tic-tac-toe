@@ -35,7 +35,7 @@ public class Game {
         throw new IllegalArgumentException("can't determine player identity from " + identity);
     }
 
-    public void play() {
+    public Optional<PlayerToken> play() {
 
         Player currentPlayer = p1;
         Board currentBoard = new Board(boardSize);
@@ -76,6 +76,7 @@ public class Game {
 
         boolean inProgress = true;
 
+        Optional<PlayerToken> winner = currentBoard.getWinner();
         while (inProgress) {
 
             System.out.print("Player " + currentPlayer.getPlaySymbol() + ": Enter your move: ");
@@ -89,7 +90,7 @@ public class Game {
             inProgress = currentBoard.isMoveAvailable();
         }
 
-        Optional<PlayerToken> winner = currentBoard.getWinner();
+        winner = currentBoard.getWinner();
         if(winner.isPresent()) {
             System.out.println("PLAYER " + winner.get() + " WINS!!!");
         }
@@ -98,5 +99,7 @@ public class Game {
         }
 
         System.out.println();
+
+        return winner;
     }
 }

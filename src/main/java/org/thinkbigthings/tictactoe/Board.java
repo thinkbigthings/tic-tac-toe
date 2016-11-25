@@ -7,15 +7,6 @@ import java.util.Optional;
 
 public class Board {
 
-    public static class Cell {
-        private int row=0;
-        private int col=0;
-        public Cell(int row, int col) {
-            this.row = row;
-            this.col = col;
-        }
-    }
-
     private int boardSize;
     private PlayerToken[][] positions;
     private int playCount = 0;
@@ -75,8 +66,8 @@ public class Board {
         for (int i = 0; i < boardSize; i++) {
             allDiag &= play.equals(positions[i][i]);
             allAntiDiag &= play.equals(positions[i][(boardSize - 1) - i]);
-            allCol &= play.equals(positions[i][position.col]);
-            allRow &= play.equals(positions[position.row][i]);
+            allCol &= play.equals(positions[i][position.getColumn()]);
+            allRow &= play.equals(positions[position.getRow()][i]);
         }
 
         return allRow || allCol || allDiag || allAntiDiag;
@@ -86,12 +77,12 @@ public class Board {
         if(!moveAvailable) {
             throw new IllegalArgumentException("No moves are available");
         }
-        if( positions[position.row][position.col] != null) {
+        if( positions[position.getRow()][position.getColumn()] != null) {
             throw new IllegalArgumentException("Can't move here");
         }
 
         Board newBoard = new Board(this);
-        newBoard.positions[position.row][position.col] = player;
+        newBoard.positions[position.getRow()][position.getColumn()] = player;
         newBoard.playCount++;
 
         if(newBoard.isWinner(player, position)) {
