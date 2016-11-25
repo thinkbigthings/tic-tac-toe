@@ -41,9 +41,11 @@ public class Game {
         Board currentBoard = new Board(boardSize);
 
         // for 0.3.3
-        // TODO be able to monitor and record with JMX and jvisualvm
+        // TODO be able to monitor and record with JMX and jvisualvm, add notes to README
         // TODO run with profiler
+
         // TODO break build on decreasing code coverage
+        // https://github.com/gradle/gradle/issues/824
         // http://stackoverflow.com/questions/35540823/minimum-code-coverage-threshold-in-jacoco-gradle
 
         // for 0.4.0
