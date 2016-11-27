@@ -10,7 +10,7 @@ public class Board {
     private int boardSize;
     private PlayerToken[][] positions;
     private int playCount = 0;
-    private Optional<PlayerToken> winner = Optional.empty();
+    private PlayerToken winner = null;
     private boolean moveAvailable = true;
 
     public Board(int size) {
@@ -49,7 +49,7 @@ public class Board {
     }
 
     public Optional<PlayerToken> getWinner() {
-        return winner;
+        return Optional.ofNullable(winner);
     }
 
     private boolean isFull() {
@@ -86,7 +86,7 @@ public class Board {
         newBoard.playCount++;
 
         if(newBoard.isWinner(player, position)) {
-            newBoard.winner = Optional.of(player);
+            newBoard.winner = player;
             newBoard.moveAvailable = false;
         }
         else if(newBoard.isFull()) {
