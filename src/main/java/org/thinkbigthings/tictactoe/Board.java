@@ -46,6 +46,14 @@ public class Board {
         return moveAvailable;
     }
 
+    public int getAvailableMoveCount() {
+        return (boardSize*boardSize) - playCount;
+    }
+
+    public boolean isWinner(PlayerToken player) {
+        return player.equals(winner);
+    }
+
     public Optional<PlayerToken> getWinner() {
         return Optional.ofNullable(winner);
     }

@@ -80,6 +80,8 @@ public class PerfectPlayer implements Player {
             PlayerToken nextPlayer = nextPlayer(player);
 
             // TODO with all the references to root, maybe this should be moved into that class
+            // also if the tree is rebuilt with every move, don't need to instantiate entire tree before traversing
+            // can just instantiate and check board as you traverse a virtual tree
 
             currentBoard.setChildren(currentBoard.asNodes(getAvailableMoves(currentBoard.getContent(), player)));
             currentBoard.getChildren().forEach(c -> buildGameTree(c, nextPlayer));
@@ -93,18 +95,16 @@ public class PerfectPlayer implements Player {
         public long getNumberWinningBoards(Node<Board> node, PlayerToken player) {
             return node.stream()
                     .map(Node::getContent)
-                    .filter(b -> player.equals(b.getWinner().orElse(null)))
+                    .filter(b -> b.isWinner(player))
                     .count();
         }
 
-        // TODO if counting number of available moves is too cpu intensive,
-        // could track that number inside the board and return directly
         public int countMovesToClosestWin(Node<Board> node, PlayerToken player) {
-            final int rootNumMovesAvailable = node.getContent().getAvailableMoves().size();
+            final int rootNumMovesAvailable = node.getContent().getAvailableMoveCount();
             OptionalInt distance = node.stream()
                     .map(Node::getContent)
-                    .filter(b -> player.equals(b.getWinner().orElse(null)))
-                    .mapToInt(b -> rootNumMovesAvailable - b.getAvailableMoves().size())
+                    .filter(b -> b.isWinner(player))
+                    .mapToInt(b -> rootNumMovesAvailable - b.getAvailableMoveCount())
                     .min();
             return distance.orElse(Integer.MAX_VALUE);
         }
