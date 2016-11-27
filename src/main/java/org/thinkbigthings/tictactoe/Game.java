@@ -40,17 +40,21 @@ public class Game {
         Player currentPlayer = p1;
         Board currentBoard = new Board(boardSize);
 
-        // for 0.3.3
-        // TODO be able to monitor and record with JMX and jvisualvm, add notes to README
-        // TODO run with profiler
+        // for 0.4.0
+        // TODO write logs to a file instead of standard out so CLI UI is better. Use lambdas / async logs
+        // TODO use a tic tac toe image on startup
 
+        // for 0.4.1
         // TODO break build on decreasing code coverage
         // https://github.com/gradle/gradle/issues/824
         // http://stackoverflow.com/questions/35540823/minimum-code-coverage-threshold-in-jacoco-gradle
 
-        // for 0.4.0
-        // TODO write logs to a file instead of standard out so CLI UI is better. Use lambdas / async logs
-        // TODO use a tic tac toe image on startup
+        // TODO connect to mbeans to monitor cpu and boot endpoints, may be some properties to set too
+        // Although we don't have any health endpoints yet
+        // http://stackoverflow.com/questions/30069643/remote-monitoring-with-visualvm-and-jmx
+        // http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#boot-features-jmx
+        // try setting own mbeans?
+        // Logs: o.s.j.e.a.AnnotationMBeanExporter : Registering beans for JMX exposure on startup
 
         // for 0.5.0
         // TODO handle TODO's elsewhere in the code or move to this list

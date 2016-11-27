@@ -82,7 +82,7 @@ public class PerfectPlayer implements Player {
             // TODO with all the references to root, maybe this should be moved into that class
 
             currentBoard.setChildren(currentBoard.asNodes(getAvailableMoves(currentBoard.getContent(), player)));
-            currentBoard.getChildren().stream().forEach(c -> buildGameTree(c, nextPlayer));
+            currentBoard.getChildren().forEach(c -> buildGameTree(c, nextPlayer));
             return currentBoard;
         }
 

@@ -21,20 +21,18 @@ java -jar tic-tac-toe-x.y.z.jar --boardSize=3 --player1.identity=human --player2
 
 ## Monitoring
 
-JVisualVM (https://visualvm.github.io) is the default Java monitoring tool.
+### VisualVM Setup and Configuration
+- [JVisualVM](https://visualvm.github.io) is the default Java monitoring tool.
+- IntelliJ also has a [VisualVM Plugin](https://plugins.jetbrains.com/plugin/?idea&pluginId=7115)
+- VisualVM should have the VisualVM-MBeans plugin installed.
 
-
-
-VisualVM should have the VisualVM-MBeans plugin installed.
-
-To get everything up and running:
+### Running VisualVM
 - Launch jvisualvm &
 - Launch java -jar build/libs/tic-tac-toe-0.3.2.jar
 - Look in jvisualvm for the spring boot main class: org.springframework.boot.loader.JarLauncher
 - double click the class
 - wait a few minutes (takes a while to load)
+- look at the profiling tab (sampling seems to not work)
 
 
-TODO connect to to mbeans to monitor cpu and boot endpoints, may be some properties to set too
-http://stackoverflow.com/questions/30069643/remote-monitoring-with-visualvm-and-jmx
-http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#boot-features-jmx
+

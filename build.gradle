@@ -23,7 +23,7 @@ apply plugin: "jacoco"
 
 jar {
 	baseName = 'tic-tac-toe'
-	version =  '0.3.2'
+	version =  '0.3.3'
 }
 
 bootRun {
