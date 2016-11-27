@@ -15,7 +15,7 @@ import static org.mockito.Mockito.when;
 
 public class HumanPlayerTest {
 
-    private PlayerToken X = new PlayerToken("X");
+    private final PlayerToken X = new PlayerToken("X");
 
     @Test
     public void testPlay() throws Exception {

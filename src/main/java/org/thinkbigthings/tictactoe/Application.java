@@ -10,7 +10,7 @@ import java.util.Scanner;
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
-	private GameConfig config;
+	private final GameConfig config;
 
 	@Inject
 	public Application(GameConfig providedConfig) {

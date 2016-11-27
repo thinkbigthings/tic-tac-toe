@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class RandomPlayer implements Player {
 
-    private PlayerToken playSymbol;
+    private final PlayerToken playSymbol;
     private final Random random = new Random();
 
     @Override

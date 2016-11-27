@@ -12,9 +12,9 @@ import java.util.Optional;
 
 public class Game {
 
-    private Player p1;
-    private Player p2;
-    int boardSize;
+    private final Player p1;
+    private final Player p2;
+    private final int boardSize;
 
     public Game(GameConfig config) {
         p1 = createPlayer(new PlayerToken(config.getTokenPlayer1()), config.getIdentityPlayer1());
@@ -80,7 +80,7 @@ public class Game {
 
         boolean inProgress = true;
 
-        Optional<PlayerToken> winner = currentBoard.getWinner();
+        Optional<PlayerToken> winner;
         while (inProgress) {
 
             System.out.print("Player " + currentPlayer.getPlaySymbol() + ": Enter your move: ");

@@ -9,8 +9,8 @@ import java.io.BufferedReader;
 public class HumanPlayer implements Player {
 
     // System.console() and Scanner are final and can't be mocked, so using BufferedReader instead
-    private BufferedReader input;
-    private PlayerToken playSymbol;
+    private final BufferedReader input;
+    private final PlayerToken playSymbol;
 
     @Override
     public PlayerToken getPlaySymbol() {

@@ -2,7 +2,7 @@ package org.thinkbigthings.tictactoe;
 
 public class PlayerToken {
 
-    private String display;
+    private final String display;
 
     public PlayerToken(String s) {
         display = s;

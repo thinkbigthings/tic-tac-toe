@@ -12,8 +12,8 @@ import java.util.stream.StreamSupport;
 // TODO non-player methods should eventually be private
 public class PerfectPlayer implements Player {
 
-    private PlayerToken playSymbol;
-    private PlayerToken opponent = new PlayerToken(UUID.randomUUID().toString());
+    private final PlayerToken playSymbol;
+    private final PlayerToken opponent = new PlayerToken(UUID.randomUUID().toString());
 
     public PerfectPlayer(PlayerToken symbol) {
         playSymbol = symbol;
@@ -33,8 +33,8 @@ public class PerfectPlayer implements Player {
 
     public static class BoardTree {
 
-        private PlayerToken player1;
-        private PlayerToken player2;
+        private final PlayerToken player1;
+        private final PlayerToken player2;
 
 
         public BoardTree(PlayerToken p1, PlayerToken p2) {
@@ -92,7 +92,7 @@ public class PerfectPlayer implements Player {
 
         public long getNumberWinningBoards(Node<Board> node, PlayerToken player) {
             return node.stream()
-                    .map(n -> n.getContent())
+                    .map(Node::getContent)
                     .filter(b -> player.equals(b.getWinner().orElse(null)))
                     .count();
         }
@@ -102,7 +102,7 @@ public class PerfectPlayer implements Player {
         public int countMovesToClosestWin(Node<Board> node, PlayerToken player) {
             final int rootNumMovesAvailable = node.getContent().getAvailableMoves().size();
             OptionalInt distance = node.stream()
-                    .map(n -> n.getContent())
+                    .map(Node::getContent)
                     .filter(b -> player.equals(b.getWinner().orElse(null)))
                     .mapToInt(b -> rootNumMovesAvailable - b.getAvailableMoves().size())
                     .min();
@@ -120,8 +120,8 @@ public class PerfectPlayer implements Player {
 
     public static class Node<T> {
 
-        private T content;
-        private Set<Node<T>> children = new HashSet<>();
+        private final T content;
+        private final Set<Node<T>> children = new HashSet<>();
 
         public Node(T nodeContent) {
             content = nodeContent;
@@ -141,7 +141,7 @@ public class PerfectPlayer implements Player {
         }
 
         public Set<Node<T>> asNodes(Set<T> contents) {
-            return contents.stream().map(t -> new Node<T>(t)).collect(Collectors.toSet());
+            return contents.stream().map(t -> new Node<>(t)).collect(Collectors.toSet());
         }
 
         /**

@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public class Board {
 
-    private int boardSize;
-    private PlayerToken[][] positions;
+    private final int boardSize;
+    private final PlayerToken[][] positions;
     private int playCount = 0;
     private PlayerToken winner = null;
     private boolean moveAvailable = true;
@@ -24,9 +24,7 @@ public class Board {
         winner = toCopy.winner;
         positions = new PlayerToken[boardSize][boardSize];
         for (int r = 0; r < boardSize; r++) {
-            for (int c = 0; c < boardSize; c++) {
-                positions[r][c] = toCopy.positions[r][c];
-            }
+            System.arraycopy(toCopy.positions[r], 0, positions[r], 0, boardSize);
         }
     }
 
@@ -97,7 +95,7 @@ public class Board {
     }
 
     public String toString() {
-        StringBuffer string = new StringBuffer();
+        StringBuilder string = new StringBuilder();
         for (int r = 0; r < boardSize; r++) {
             for (int c = 0; c < boardSize; c++) {
                 String token = positions[r][c] == null ? " " : positions[r][c].toString();

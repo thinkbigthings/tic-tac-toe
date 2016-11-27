@@ -10,9 +10,9 @@ import static org.junit.Assert.assertFalse;
 
 public class PerfectPlayerTest {
 
-    private PlayerToken X = new PlayerToken("X");
-    private PlayerToken O = new PlayerToken("O");
-    private Player p1 = new PerfectPlayer(X);
+    private final PlayerToken X = new PlayerToken("X");
+    private final PlayerToken O = new PlayerToken("O");
+    private final Player p1 = new PerfectPlayer(X);
 
     @Test
     public void testLogicalMove1() throws Exception {
