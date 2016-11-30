@@ -9,7 +9,7 @@ public class Board {
 
     private final int boardSize;
     private final PlayerToken[][] positions;
-    private int playCount = 0;
+    private int numMovesAvailable;
     private PlayerToken winner = null;
     private boolean moveAvailable = true;
 
@@ -20,7 +20,7 @@ public class Board {
 
     public Board(Board toCopy) {
         boardSize = toCopy.boardSize;
-        playCount = toCopy.playCount;
+        numMovesAvailable = toCopy.numMovesAvailable;
         winner = toCopy.winner;
         positions = new PlayerToken[boardSize][boardSize];
         for (int r = 0; r < boardSize; r++) {
@@ -42,12 +42,16 @@ public class Board {
         return moves;
     }
 
+    /**
+     *
+     * @return true if there are no cells left OR if a player has already won.
+     */
     public boolean isMoveAvailable() {
         return moveAvailable;
     }
 
     public int getAvailableMoveCount() {
-        return (boardSize*boardSize) - playCount;
+        return numMovesAvailable;
     }
 
     public boolean isWinner(PlayerToken player) {
@@ -59,7 +63,7 @@ public class Board {
     }
 
     private boolean isFull() {
-        return playCount == (boardSize * boardSize);
+        return numMovesAvailable == 0;
     }
 
     private boolean isWinner(PlayerToken play, Cell position) {
@@ -89,7 +93,7 @@ public class Board {
 
         Board newBoard = new Board(this);
         newBoard.positions[position.getRow()][position.getColumn()] = player;
-        newBoard.playCount++;
+        newBoard.numMovesAvailable--;
 
         if(newBoard.isWinner(player, position)) {
             newBoard.winner = player;
