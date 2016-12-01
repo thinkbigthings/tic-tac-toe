@@ -59,6 +59,9 @@ public class PerfectPlayer implements Player {
             // TODO can we do this loop with a stream?
 
             // FIXME countMoves came back as 0 when it should have been 1.
+            // issue is that countMoves does not calculate the actual number of moves for that player,
+            // just the difference between ALL moves available and moves made
+            // should clean this up so it's more meaningful, might fix the play bug (where it's losing) too.
 
             for(Node<Board> child : gameTree.getChildren()) {
                 int currentMovesToWin = countMovesToClosestWin(child, player);
