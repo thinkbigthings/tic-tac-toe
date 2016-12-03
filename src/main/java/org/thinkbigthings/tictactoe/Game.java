@@ -41,7 +41,6 @@ public class Game {
         Board currentBoard = new Board(boardSize);
 
         // for 0.4.0
-        // TODO write logs to a file instead of standard out so CLI UI is better. Use lambdas / async logs
         // TODO use a tic tac toe image on startup
 
         // for 0.4.1
@@ -55,6 +54,8 @@ public class Game {
         // http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#boot-features-jmx
         // try setting own mbeans?
         // Logs: o.s.j.e.a.AnnotationMBeanExporter : Registering beans for JMX exposure on startup
+
+        // TODO Use lambdas / async logs
 
         // for 0.5.0
         // TODO handle TODO's elsewhere in the code or move to this list
