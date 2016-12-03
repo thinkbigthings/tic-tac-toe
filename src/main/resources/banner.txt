@@ -1,1 +1,8 @@
-${Ansi.GREEN} :: Sample application build with Spring Boot${spring-boot.formatted-version} ::${Ansi.DEFAULT}
+
+TIC TAC TOE!
+
+__|__|__
+__|__|__
+  |  |
+
+============

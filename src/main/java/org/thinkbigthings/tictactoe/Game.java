@@ -40,9 +40,6 @@ public class Game {
         Player currentPlayer = p1;
         Board currentBoard = new Board(boardSize);
 
-        // for 0.4.0
-        // TODO use a tic tac toe image on startup
-
         // for 0.4.1
         // TODO break build on decreasing code coverage
         // https://github.com/gradle/gradle/issues/824
