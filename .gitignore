@@ -6,3 +6,4 @@ build/
 # Package Files #
 *.jar
 
+*.log

@@ -27,7 +27,12 @@ public class PerfectPlayerTest {
         assertFalse(board.getAvailableMoves().contains(new Cell(1,2)));
     }
 
-
+    // TODO O should block imminent win as part of its strategy if it can't win in next move
+//    X| |
+//   ------
+//    O|X|
+//    ------
+//     | |
 
     @Test
     public void testPlayHorizontalToWin() throws Exception {

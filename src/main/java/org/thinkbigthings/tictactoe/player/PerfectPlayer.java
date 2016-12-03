@@ -7,10 +7,13 @@ import org.thinkbigthings.tictactoe.PlayerToken;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-// TODO non-player methods should eventually be private
+
 public class PerfectPlayer implements Player {
+
+
 
     private final PlayerToken playSymbol;
     private final PlayerToken opponent = new PlayerToken(UUID.randomUUID().toString());
@@ -32,10 +35,9 @@ public class PerfectPlayer implements Player {
 
 
     public static class BoardTree {
-
+        private Logger logger = LoggerFactory.getLogger(getClass());
         private final PlayerToken player1;
         private final PlayerToken player2;
-
 
         public BoardTree(PlayerToken p1, PlayerToken p2) {
             player1 = p1;
@@ -66,6 +68,9 @@ public class PerfectPlayer implements Player {
             for(Node<Board> child : gameTree.getChildren()) {
                 int currentMovesToWin = countMovesToClosestWin(child, player);
                 if(currentMovesToWin < movesToClosestWin) {
+                    logger.debug("setting moves to closest win to " + currentMovesToWin);
+                    logger.debug("for board ");
+                    logger.debug(child.getContent().toString());
                     nextBoard = child.getContent();
                     movesToClosestWin = currentMovesToWin;
                 }
