@@ -41,6 +41,10 @@ public class Cell {
 
     @Override
     public int hashCode() {
+
+        // TODO evaluate whether easier to use java.util.Objects for equals/hashcode
+        // java.util.Objects.hash(row, col);
+
         // you pick a hard-coded, randomly chosen, non-zero, odd number
         // ideally different for each class
         return new HashCodeBuilder(17, 37).

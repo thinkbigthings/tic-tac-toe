@@ -40,6 +40,9 @@ public class Game {
         Player currentPlayer = p1;
         Board currentBoard = new Board(boardSize);
 
+        // TODO gradle wrapper jar isn't being checked in because of gitignore on jars
+        // should check in the wrapper jar but not necessarily gradle proper
+
         // for 0.4.1
         // TODO break build on decreasing code coverage
         // https://github.com/gradle/gradle/issues/824
@@ -47,7 +50,7 @@ public class Game {
 
         // TODO connect to mbeans to monitor cpu and boot endpoints, may be some properties to set too
         // Although we don't have any health endpoints yet
-        // http://stackoverflow.com/questions/30069643/remote-monitoring-with-visualvm-and-jmx
+        // http://stackoverflow.com/que=stions/30069643/remote-monitoring-with-visualvm-and-jmx
         // http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#boot-features-jmx
         // try setting own mbeans?
         // Logs: o.s.j.e.a.AnnotationMBeanExporter : Registering beans for JMX exposure on startup
@@ -61,6 +64,7 @@ public class Game {
         // for 1.0
         // TODO improve algorithm for the AI
         // account for number of ways to win besides just nearest win, account for blocking opponent imminent win
+
         // TODO keep track of score between multiple games
 
 
